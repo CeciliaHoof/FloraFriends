@@ -27,12 +27,12 @@ class User(db.Model, SerializerMixin):
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     username = db.Column(db.String, unique = True)
-    #hash_password = db.Column(db.String)
+    #_password_hash = db.Column(db.String)
 
     purchased_plants = db.relationship('PurchasedPlant', back_populates = 'user', cascade='all, delete')
     plants = association_proxy('purchased_plants', 'plant')   
-
-    plant_cares = db.relationship('PlantCare', back_populates = 'user', cascade = 'all, delete')
+    plant_cares = association_proxy('purchased_plants', 'plant_cares')
+    # plant_cares = db.relationship('PlantCare', back_populates = 'user', cascade = 'all, delete')
 
     def __repr__(self):
         return f'<User {self.id} | {self.username} | {self.plants}>'
@@ -51,6 +51,8 @@ class PurchasedPlant(db.Model, SerializerMixin):
     plant = db.relationship('Plant', back_populates = 'purchased_plants')
     user = db.relationship('User', back_populates = 'purchased_plants')
 
+    plant_cares = db.relationship('PlantCare', back_populates = 'user', cascade = 'all, delete')
+
     def __repr__(self):
         return f'<User {self.id} | {self.plant} | {self.user}>'
     
@@ -65,8 +67,9 @@ class PlantCare(db.Model, SerializerMixin):
     comment = db.Column (db.String)
     date = db.Column(db.DateTime)
     
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship('User', back_populates = 'plant_cares')
+    purchased_plants_id = db.Column(db.Integer, db.ForeignKey('purchased_plants.id'))
+    purchased_plat = db.relationship('PurchasedPlant', back_populates = 'plant_cares')
+
 
     def __repr__(self):
         return f'<PlantCare {self.id} | {self.user} | {self.plant} | {self.date}>'
