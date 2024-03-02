@@ -27,9 +27,9 @@ class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key = True)
-    first_name = db.Column(db.String)
-    last_name = db.Column(db.String)
-    username = db.Column(db.String, unique = True)
+    first_name = db.Column(db.String, nullable=False)
+    last_name = db.Column(db.String, nullable = False)
+    username = db.Column(db.String, unique = True, nullable = False)
     #_password_hash = db.Column(db.String) --will need to add this to serialize rules once it is active
 
     purchased_plants = db.relationship('PurchasedPlant', back_populates = 'user', cascade='all, delete')
@@ -67,7 +67,7 @@ class PurchasedPlant(db.Model, SerializerMixin):
     plant = db.relationship('Plant', back_populates = 'purchased_plants')
     user = db.relationship('User', back_populates = 'purchased_plants')
 
-    plant_cares = db.relationship('PlantCare', back_populates = 'user', cascade = 'all, delete')
+    plant_cares = db.relationship('PlantCare', back_populates = 'purchased_plant', cascade = 'all, delete')
 
     serialize_rules = ('-plant.purchased_plants', '-user.purchased_plants', '-plant_cares.purchased_plant')
 
