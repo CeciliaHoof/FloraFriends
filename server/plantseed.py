@@ -1,30 +1,6 @@
 from models import Plant
 #from client.public import database_pictures
 
-
-
-# class Plant(db.Model, SerializerMixin):
-#     __tablename__ = 'plants'
-
-#     id = db.Column(db.Integer, primary_key = True)
-#     scientific_name = db.Column(db.String)
-#     common_name = db.Column(db.String)
-#     watering = db.Column(db.String)
-#     zone = db.Column(db.String)
-#     sunlight = db.Column(db.String)
-#     image = db.Column(db.String)
-
-#     purchased_plants = db.relationship('PurchasedPlant', back_populates = 'plant')
-#     users = association_proxy('purchased_plants', 'user')
-
-#     def __repr__(self):
-#         return f'<Plant {self.id} | {self.common_name}>'
-
-
-#  [ 'Full Sun', 'Partial Sun', 'Bright Indirect Light', 'Direct Light']
-
-
-
 plantseeds = [
     Plant(
         scientific_name = 'Aloe vera',
