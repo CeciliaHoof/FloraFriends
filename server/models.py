@@ -66,13 +66,14 @@ class User(db.Model, SerializerMixin):
         return value
     
     def __repr__(self):
-        return f'<User {self.id} | {self.username} | {self.plants}>'
+        return f'<User {self.id} | {self.username}>'
     
 class PurchasedPlant(db.Model, SerializerMixin):
     __tablename__ = 'purchased_plants'
     
     id = db.Column(db.Integer, primary_key = True)
     created_at = db.Column(db.DateTime, server_default = db.func.now())
+    updated_at =  db.Column(db.DateTime, onupdate = db.func.now())
     purchased_from = db.Column(db.String)
     purchased_on = db.Column(db.DateTime)
     
@@ -87,7 +88,7 @@ class PurchasedPlant(db.Model, SerializerMixin):
     serialize_rules = ('-plant.purchased_plants', '-user.purchased_plants', '-plant_cares.purchased_plant')
 
     def __repr__(self):
-        return f'<User {self.id} | {self.plant} | {self.user}>'
+        return f'<Purchased Plant {self.id} | {self.plant} | {self.user}>'
     
 class PlantCare(db.Model, SerializerMixin):
     __tablename__ = 'plant_cares'
@@ -96,16 +97,17 @@ class PlantCare(db.Model, SerializerMixin):
     created_at = db.Column(db.DateTime, server_default = db.func.now())
     updated_at =  db.Column(db.DateTime, onupdate = db.func.now())
     type_care = db.Column(db.String)
-    plant = db.Column(db.String)
     comment = db.Column (db.String)
     date = db.Column(db.DateTime)
     
-    purchased_plants_id = db.Column(db.Integer, db.ForeignKey('purchased_plants.id'))
+    purchased_plant_id = db.Column(db.Integer, db.ForeignKey('purchased_plants.id'))
     purchased_plant = db.relationship('PurchasedPlant', back_populates = 'plant_cares')
+    
+    user = association_proxy('purchased_plant', 'user')
 
     serialize_rules = ('-purchased_plant.plant_cares', )
 
     def __repr__(self):
-        return f'<PlantCare {self.id} | {self.user} | {self.plant} | {self.date}>'
+        return f'<PlantCare {self.id} | {self.user.username} | {self.purchased_plant.plant} | {self.date}>'
     
 # validate purchased_on for correct format to turn into datetime?

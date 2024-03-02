@@ -49,7 +49,9 @@ class PlantCares(Resource):
             new_plantcare = PlantCare()
             for key, value in care_data.items():
                 setattr(new_plantcare, key, value)
-            
+            date_str = care_data['date']
+            care_date = datetime.strptime(date_str, '%m/%d/%Y').date()
+            new_plantcare.date = care_date
             db.session.add(new_plantcare)
             db.session.commit()
 
@@ -78,12 +80,16 @@ class PlantCaresByID(Resource):
         try:
             for key, value in patch_data.items():
                 setattr(plantcare, key, value)
+            if 'date' in patch_data.keys():
+                date_str = patch_data['date']
+                care_date = datetime.strptime(date_str, '%m/%d/%Y').date()
+                plantcare.date = care_date
             
             db.session.commit()
             return make_response(plantcare.to_dict(), 202)
         
         except Exception as e:
-            return make_response([str(e)], 400)
+            return make_response([str(e)], 422)
         
     def delete(self, id):
         plantcare = PlantCare.query.filter(PlantCare.id == id).first()
@@ -157,6 +163,7 @@ class UsersById(Resource):
             response_message = {'error': 'User not found'}
             status = 404
         else:
+            session['user_id'] = None
             db.session.delete(user)
             db.session.commit()
             response_message = {}
@@ -268,7 +275,7 @@ class PurchasedPlantsById(Resource):
 
                 for k, v in json.items():
                     setattr(purchased_plant, k, v)
-                if json['purchased_on']:
+                if 'purchased_on' in json.keys():
                     date_str = json['purchased_on']
                     purchased = datetime.strptime(date_str, '%m/%d/%Y').date()
                     purchased_plant.purchased_on = purchased
