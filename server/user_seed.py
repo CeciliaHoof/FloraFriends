@@ -16,33 +16,33 @@ if __name__ == '__main__':
         print('clearing users...')
         User.query.delete()
 
-        print("Starting seeding users...")
-        # Seed code goes here!
-        users = []
+        # print("Starting seeding users...")
+        # # Seed code goes here!
+        # users = []
         
-        u1 = User(
-            username = 'user1',
-            first_name = fake.first_name(),
-            last_name = fake.first_name()
-        )
+        # u1 = User(
+        #     username = 'user1',
+        #     first_name = fake.first_name(),
+        #     last_name = fake.first_name()
+        # )
 
-        users.append(u1)
+        # users.append(u1)
 
-        u2 = User(
-            username = 'user2',
-            first_name = fake.first_name(),
-            last_name = fake.first_name()
-        )
+        # u2 = User(
+        #     username = 'user2',
+        #     first_name = fake.first_name(),
+        #     last_name = fake.first_name()
+        # )
 
-        users.append(u2)
+        # users.append(u2)
 
-        u3 = User(
-            username = 'user3',
-            first_name = fake.first_name(),
-            last_name = fake.first_name()
-        )
+        # u3 = User(
+        #     username = 'user3',
+        #     first_name = fake.first_name(),
+        #     last_name = fake.first_name()
+        # )
 
-        users.append(u3)
+        # users.append(u3)
 
-        db.session.add_all(users)
+        # db.session.add_all(users)
         db.session.commit()
