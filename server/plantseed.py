@@ -1,5 +1,5 @@
 from models import Plant
-from client.public import database_pictures
+#from client.public import database_pictures
 
 plantseeds = [
     Plant(

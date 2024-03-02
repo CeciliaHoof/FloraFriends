@@ -1,8 +1,9 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import validates
+from sqlalchemy.ext.hybrid import hybrid_property
 
-from config import db
+from config import db, bcrypt
 
 class Plant(db.Model, SerializerMixin):
     __tablename__ = 'plants'
@@ -27,26 +28,40 @@ class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key = True)
-    first_name = db.Column(db.String)
-    last_name = db.Column(db.String)
-    username = db.Column(db.String, unique = True)
-    #_password_hash = db.Column(db.String) --will need to add this to serialize rules once it is active
+    first_name = db.Column(db.String, nullable=False)
+    last_name = db.Column(db.String, nullable = False)
+    username = db.Column(db.String, unique = True, nullable = False)
+    _password_hash = db.Column(db.String)
 
     purchased_plants = db.relationship('PurchasedPlant', back_populates = 'user', cascade='all, delete')
     plants = association_proxy('purchased_plants', 'plant')   
     plant_cares = association_proxy('purchased_plants', 'plant_cares')
 
-    serialize_rules = ('-purchased_plants.user', )
+    @hybrid_property
+    def password_hash(self):
+        raise Exception('Password hashes may not be viewed.')
+
+    @password_hash.setter
+    def password_hash(self, password):
+        password_hash = bcrypt.generate_password_hash(
+            password.encode('utf-8'))
+        self._password_hash = password_hash.decode('utf-8')
+
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(
+            self._password_hash, password.encode('utf-8'))
     
+    serialize_rules = ('-purchased_plants.user', '-password_hash', '-_password_hash')
+
     @validates('username')
     def validate_username(self, key, value):
-        if not 3 <= len(value) <=20:
+        if not value or not 3 <= len(value) <=20:
             raise ValueError('Username must be between 3 and 20 characters')
         return value
     
     @validates('first_name', 'last_name')
     def validate_names(self, key, value):
-        if not 2 <= len(value) <= 20:
+        if not value or not 2 <= len(value) <= 20:
             raise ValueError('First and last name must be between 2 and 20 characters')
         return value
     
@@ -67,7 +82,7 @@ class PurchasedPlant(db.Model, SerializerMixin):
     plant = db.relationship('Plant', back_populates = 'purchased_plants')
     user = db.relationship('User', back_populates = 'purchased_plants')
 
-    plant_cares = db.relationship('PlantCare', back_populates = 'user', cascade = 'all, delete')
+    plant_cares = db.relationship('PlantCare', back_populates = 'purchased_plant', cascade = 'all, delete')
 
     serialize_rules = ('-plant.purchased_plants', '-user.purchased_plants', '-plant_cares.purchased_plant')
 
