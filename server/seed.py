@@ -28,7 +28,7 @@ if __name__ == '__main__':
         print("Seeding users...")
         users = []
 
-        for _ in range(3):
+        for _ in range(10):
             unique_username = fake.unique.user_name()
             first_name = fake.first_name()
             last_name = fake.last_name()
@@ -44,29 +44,14 @@ if __name__ == '__main__':
 
         purchased_plants = []
 
-        for _ in range(3):
-            purchased_from = fake.name()
-            plant_id = randint(1, 40)
-            date = fake.date_this_decade()
+        for x in range(10):
+            for _ in range(3):
+                purchased_from = fake.name()
+                plant_id = randint(1, 40)
+                date = fake.date_this_decade()
 
-            purchase = PurchasedPlant(user_id = 1, purchased_from = purchased_from, purchased_on = date, plant_id = plant_id)
-            purchased_plants.append(purchase)
-
-        for _ in range(3):
-            purchased_from = fake.name()
-            plant_id = randint(1, 40)
-            date = fake.date_this_decade()
-
-            purchase = PurchasedPlant(user_id = 2, purchased_from = purchased_from, purchased_on = date, plant_id = plant_id)
-            purchased_plants.append(purchase)
-
-        for _ in range(3):
-            purchased_from = fake.company()
-            plant_id = randint(1, 40)
-            date = fake.date_this_decade()
-
-            purchase = PurchasedPlant(user_id = 3, purchased_from = purchased_from, purchased_on = date, plant_id = plant_id)
-            purchased_plants.append(purchase)
+                purchase = PurchasedPlant(user_id = x+1, purchased_from = purchased_from, purchased_on = date, plant_id = plant_id)
+                purchased_plants.append(purchase)
         
         db.session.add_all(purchased_plants)
 
@@ -74,9 +59,9 @@ if __name__ == '__main__':
 
         plant_cares = []
 
-        for x in range(9):
+        for _ in range(30):
             care = PlantCare(
-                purchased_plant_id = x+1,
+                purchased_plant_id = randint(1, 30),
                 type_care = 'watering',
                 comment = fake.sentence(),
                 date = fake.date_this_decade()
