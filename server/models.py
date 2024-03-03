@@ -35,7 +35,7 @@ class User(db.Model, SerializerMixin):
 
     purchased_plants = db.relationship('PurchasedPlant', back_populates = 'user', cascade='all, delete')
     plants = association_proxy('purchased_plants', 'plant')   
-    plant_cares = association_proxy('purchased_plants', 'plant_cares')
+    plant_cares = association_proxy('purchased_plants', 'plant_cares', creator=lambda plant_care_obj: PurchasedPlant(plant_care = plant_care_obj))
 
     @hybrid_property
     def password_hash(self):
