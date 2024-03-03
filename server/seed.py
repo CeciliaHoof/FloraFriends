@@ -44,14 +44,14 @@ if __name__ == '__main__':
 
         purchased_plants = []
 
-        for x in range(10):
-            for _ in range(3):
-                purchased_from = fake.name()
-                plant_id = randint(1, 40)
-                date = fake.date_this_decade()
+        for _ in range(30):
+            purchased_from = fake.name()
+            plant_id = randint(1, 40)
+            date = fake.date_this_decade()
+            user_id = randint(1, 10)
 
-                purchase = PurchasedPlant(user_id = x+1, purchased_from = purchased_from, purchased_on = date, plant_id = plant_id)
-                purchased_plants.append(purchase)
+            purchase = PurchasedPlant(user_id = user_id, purchased_from = purchased_from, purchased_on = date, plant_id = plant_id)
+            purchased_plants.append(purchase)
         
         db.session.add_all(purchased_plants)
 
