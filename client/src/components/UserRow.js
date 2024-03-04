@@ -1,8 +1,9 @@
 import userImgPlaceholder from '../assets/user_img_placeholder.jpg';
 import { Item } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 function UserRow({ user, num_plant_cares }){
-    const { username, purchased_plants } = user;
+    const { id, username, purchased_plants } = user;
     
     return (
         <Item >
@@ -12,6 +13,7 @@ function UserRow({ user, num_plant_cares }){
                 <Item.Meta> 
                     <span>🌱 {purchased_plants.length} </span>
                     <span>❤️ {num_plant_cares} </span>
+                    <Link to={`/profile/${id}`}>View profile</Link>
                 </Item.Meta>
 
             </Item.Content>
