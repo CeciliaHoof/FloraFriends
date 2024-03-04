@@ -1,5 +1,5 @@
 from models import Plant
-#from client.public import database_pictures
+# from client.public import database_pictures
 
 plantseeds = [
     Plant(
@@ -8,7 +8,7 @@ plantseeds = [
         watering = 'Low',
         zone = '10 and above',
         sunlight = 'Bright, direct light',
-        image = '../client/public/database_pictures/aloe_vera.jpg'
+        image = '/static/aloe_vera.jpg'
     ),
      Plant(
         scientific_name = 'Epipremnum Aureum',
@@ -16,7 +16,7 @@ plantseeds = [
         watering = 'Moderate',
         zone = '10 and above',
         sunlight = 'Bright, indirect light',
-        image = '../client/public/database_pictures/golden_pothos.jpg'
+        image = '/static/golden_pothos.jpg'
     ),
      Plant(
         scientific_name = 'Dracaena trifasciata',
@@ -24,7 +24,7 @@ plantseeds = [
         watering = 'Low',
         zone = '9 and above',
         sunlight = 'Low to Bright, indirect or direct light',
-        image = '../client/public/database_pictures/snake_plant.jpg'
+        image = '/static/snake_plant.jpg'
     ),
     Plant(
         scientific_name='Aglaonema commutatum',
@@ -32,7 +32,7 @@ plantseeds = [
         watering='Moderate',
         zone='10 and above',
         sunlight='Low to moderate, indirect light',
-        image='../client/public/database_pictures/chinese_evergreen.jpeg'
+        image='/static/chinese_evergreen.jpeg'
     ),
     Plant(
         scientific_name='Alocasia cuprea',
@@ -40,7 +40,7 @@ plantseeds = [
         watering='Moderate',
         zone='10 and above',
         sunlight='Bright, indirect light',
-        image='../client/public/database_pictures/red_secret.jpg'
+        image='/static/red_secret.jpg'
     ),
     Plant(
         scientific_name='Anthurium andraeanum',
@@ -48,7 +48,7 @@ plantseeds = [
         watering='Moderate',
         zone='11 and above',
         sunlight='Bright, indirect light',
-        image='../client/public/database_pictures/flamingo_flower.jpg'
+        image='/static/flamingo_flower.jpg'
     ),
     Plant(
         scientific_name='Dieffenbachia oerstedii',
@@ -56,7 +56,7 @@ plantseeds = [
         watering='Moderate',
         zone='10 and above',
         sunlight='Moderate, indirect light',
-        image='../client/public/database_pictures/dumb_cane.jpeg'
+        image='/static/dumb_cane.jpeg'
     ),
     Plant(
         scientific_name='Philodendron hastatum',
@@ -64,7 +64,7 @@ plantseeds = [
         watering='Moderate',
         zone='10 and above',
         sunlight='Moderate, indirect light',
-        image='../client/public/database_pictures/silver_sword.jpeg'
+        image='/static/silver_sword.jpeg'
     ),
     Plant(
         scientific_name='Syngonium podophyllum',
@@ -72,7 +72,7 @@ plantseeds = [
         watering='Moderate',
         zone='10 and above',
         sunlight='Moderate, indirect light',
-        image='../client/public/database_pictures/arrowhead_plant.jpg'
+        image='/static/arrowhead_plant.jpg'
     ),
     Plant(
         scientific_name='Monstera adansonii',
@@ -80,7 +80,7 @@ plantseeds = [
         watering='Moderate',
         zone='10 and above',
         sunlight='Moderate, indirect light',
-        image='../client/public/database_pictures/swiss_cheese_vine.jpg'
+        image='/static/swiss_cheese_vine.jpg'
     ),
     Plant(
         scientific_name='Rhaphidophora tetrasperma',
@@ -88,7 +88,7 @@ plantseeds = [
         watering='Moderate',
         zone='9 and above',
         sunlight='Moderate, indirect light',
-        image='../client/public/database_pictures/mini_monstera.jpeg'
+        image='/static/mini_monstera.jpeg'
     ),
     Plant(
         scientific_name='Scindapsus pictus',
@@ -96,7 +96,7 @@ plantseeds = [
         watering='Moderate',
         zone='11 and above',
         sunlight='Moderate, indirect light',
-        image='../client/public/database_pictures/silver_satin_pothos.jpg'
+        image='/static/silver_satin_pothos.jpg'
     ),
     Plant(
         scientific_name='Spathiphyllum wallisii',
@@ -104,7 +104,7 @@ plantseeds = [
         watering='Moderate',
         zone='11 and above',
         sunlight='Low to moderate, indirect light',
-        image='../client/public/database_pictures/peace_lily.jpg'
+        image='/static/peace_lily.jpg'
     ),
     Plant(
         scientific_name='Schefflera actinophylla',
@@ -112,7 +112,7 @@ plantseeds = [
         watering='Moderate',
         zone='10 and above',
         sunlight='Moderate, indirect light',
-        image='../client/public/database_pictures/umbrella_tree.jpg'
+        image='/static/umbrella_tree.jpg'
     ),
     Plant(
         scientific_name='Asparagus retrofractus',
@@ -120,7 +120,7 @@ plantseeds = [
         watering='Moderate',
         zone='9 and above',
         sunlight='Bright, indirect light',
-        image='../client/public/database_pictures/asparagus_fern.jpg'
+        image='/static/asparagus_fern.jpg'
     ),
     Plant(
         scientific_name='Haworthiopsis limifolia',
@@ -128,7 +128,7 @@ plantseeds = [
         watering='Low',
         zone='10 and above',
         sunlight='Bright, indirect light',
-        image='../client/public/database_pictures/fairy_washboard.jpg'
+        image='/static/fairy_washboard.jpg'
     ),
     Plant(
         scientific_name='Phalaenopsis',
@@ -136,7 +136,7 @@ plantseeds = [
         watering='Moderate',
         zone='10 and above',
         sunlight='Moderate, indirect light',
-        image='../client/public/database_pictures/moth_orchid.jpg'
+        image='/static/moth_orchid.jpg'
     ),
     Plant(
         scientific_name='Curio radicans',
@@ -144,7 +144,7 @@ plantseeds = [
         watering='Low',
         zone='10 and above',
         sunlight='Bright, indirect light',
-        image='../client/public/database_pictures/string_of_bananas.jpeg'
+        image='/static/string_of_bananas.jpeg'
     ),
     Plant(
         scientific_name='Lithops',
@@ -152,7 +152,7 @@ plantseeds = [
         watering='Low',
         zone='10 and above',
         sunlight='Bright, direct light',
-        image='../client/public/database_pictures/living_stone.jpg'
+        image='/static/living_stone.jpg'
     ),
     Plant(
         scientific_name='Astrophytum myriostigma',
@@ -160,7 +160,7 @@ plantseeds = [
         watering='Low',
         zone='9 and above',
         sunlight='Bright, direct light',
-        image='../client/public/database_pictures/bishops_cap_cactus.jpg'
+        image='/static/bishops_cap_cactus.jpg'
     ),
     Plant(
         scientific_name='Epiphyllum oxypetalum',
@@ -168,7 +168,7 @@ plantseeds = [
         watering='Low',
         zone='10 and above',
         sunlight='Bright, indirect light',
-        image='../client/public/database_pictures/queen_of_the_night.jpg'
+        image='/static/queen_of_the_night.jpg'
     ),
     Plant(
         scientific_name='Opuntia microdasys',
@@ -176,7 +176,7 @@ plantseeds = [
         watering='Low',
         zone='9 and above',
         sunlight='Bright, direct light',
-        image='../client/public/database_pictures/bunny_ear_cactus.jpg'
+        image='/static/bunny_ear_cactus.jpg'
     ),
     Plant(
         scientific_name='Schlumbergera truncata',
@@ -184,7 +184,7 @@ plantseeds = [
         watering='Moderate',
         zone='10 and above',
         sunlight='Bright, indirect light',
-        image='../client/public/database_pictures/christmas_cactus.jpg'
+        image='/static/christmas_cactus.jpg'
     ),
     Plant(
         scientific_name='Hoya australis',
@@ -192,7 +192,7 @@ plantseeds = [
         watering='Low to moderate',
         zone='10 and above',
         sunlight='Bright, indirect light',
-        image='../client/public/database_pictures/wax_plant.jpg'
+        image='/static/wax_plant.jpg'
     ),
     Plant(
         scientific_name='Fittonia albivenis',
@@ -200,7 +200,7 @@ plantseeds = [
         watering='Moderate',
         zone='10 and above',
         sunlight='Low to moderate, indirect light',
-        image='../client/public/database_pictures/nerve_plant.jpg'
+        image='/static/nerve_plant.jpg'
     ),
     Plant(
         scientific_name='Saintpaulia ionantha',
@@ -208,7 +208,7 @@ plantseeds = [
         watering='Moderate',
         zone='11 and above',
         sunlight='Bright, indirect light',
-        image='../client/public/database_pictures/african_violet.jpg'
+        image='/static/african_violet.jpg'
     ),
     Plant(
         scientific_name='Euphorbia milii',
@@ -216,7 +216,7 @@ plantseeds = [
         watering='Low to moderate',
         zone='10 and above',
         sunlight='Bright, indirect light',
-        image='../client/public/database_pictures/crown_of_thorns.jpg'
+        image='/static/crown_of_thorns.jpg'
     ),
     Plant(
         scientific_name='Peperomia caperata',
@@ -224,7 +224,7 @@ plantseeds = [
         watering='Low to moderate',
         zone='10 and above',
         sunlight='Moderate, indirect light',
-        image='../client/public/database_pictures/emerald_ripple.jpg'
+        image='/static/emerald_ripple.jpg'
     ),
     Plant(
         scientific_name='Tillandsia ionantha',
@@ -232,7 +232,7 @@ plantseeds = [
         watering='Low to moderate',
         zone='10 and above',
         sunlight='Bright, indirect light',
-        image='../client/public/database_pictures/air_plant.jpg'
+        image='/static/air_plant.jpg'
     ),
     Plant(
         scientific_name='Sedum burrito',
@@ -240,7 +240,7 @@ plantseeds = [
         watering='Low',
         zone='9 and above',
         sunlight='Bright, indirect light',
-        image='../client/public/database_pictures/burros_tail.jpg'
+        image='/static/burros_tail.jpg'
     ),
     Plant(
         scientific_name='Ficus lyrata',
@@ -248,7 +248,7 @@ plantseeds = [
         watering='Moderate',
         zone='9 and above',
         sunlight='Bright, indirect light',
-        image='../client/public/database_pictures/fiddle_leaf_fig.jpg'
+        image='/static/fiddle_leaf_fig.jpg'
     ),
     Plant(
         scientific_name='Chamaedorea elegans',
@@ -256,7 +256,7 @@ plantseeds = [
         watering='Moderate',
         zone='8 and above',
         sunlight='Low to moderate, indirect light',
-        image='../client/public/database_pictures/parlor_palm.jpg'
+        image='/static/parlor_palm.jpg'
     ),
     Plant(
         scientific_name='Zamioculcas zamiifolia',
@@ -264,7 +264,7 @@ plantseeds = [
         watering='Low to moderate',
         zone='9 and above',
         sunlight='Low to moderate, indirect light',
-        image='../client/public/database_pictures/zz_plant.jpg'
+        image='/static/zz_plant.jpg'
     ),
     Plant(
         scientific_name='Maranta leuconeura',
@@ -272,7 +272,7 @@ plantseeds = [
         watering='Moderate',
         zone='9 and above',
         sunlight='Low to moderate, indirect light',
-        image='../client/public/database_pictures/prayer_plant.jpg'
+        image='/static/prayer_plant.jpg'
     ),
     Plant(
         scientific_name='Pilea peperomioides',
@@ -280,7 +280,7 @@ plantseeds = [
         watering='Moderate',
         zone='9 and above',
         sunlight='Moderate to Bright, indirect light',
-        image='../client/public/database_pictures/money_plant.jpg'
+        image='/static/money_plant.jpg'
     ),
     Plant(
         scientific_name='Chlorophytum comosum',
@@ -288,7 +288,7 @@ plantseeds = [
         watering='Moderate',
         zone='9 and above',
         sunlight='Moderate to bright, indirect light',
-        image='../client/public/database_pictures/spider_plant.jpg'
+        image='/static/spider_plant.jpg'
     ),
     Plant(
         scientific_name='Peperomia obtusifolia',
@@ -296,7 +296,7 @@ plantseeds = [
         watering='Moderate',
         zone='9 and above',
         sunlight='Moderate to bright, indirect light',
-        image='../client/public/database_pictures/baby_rubber_plant.jpeg'
+        image='/static/baby_rubber_plant.jpeg'
     ),
     Plant(
         scientific_name='Tradescantia zebrina',
@@ -304,7 +304,7 @@ plantseeds = [
         watering='Moderate',
         zone='9 and above',
         sunlight='Bright, indirect light',
-        image='../client/public/database_pictures/wandering_dude.jpg'
+        image='/static/wandering_dude.jpg'
     ),
     Plant(
         scientific_name='Ficus elastica',
@@ -312,7 +312,7 @@ plantseeds = [
         watering='Moderate',
         zone='9 and above',
         sunlight='Bright, indirect light',
-        image='../client/public/database_pictures/rubber_plant.jpg'
+        image='/static/rubber_plant.jpg'
     ),
     Plant(
         scientific_name='Ceropegia woodii',
@@ -320,6 +320,6 @@ plantseeds = [
         watering='Low',
         zone='9 and above',
         sunlight='Bright, indirect light',
-        image='../client/public/database_pictures/string_of_hearts.jpg'
+        image='/static/string_of_hearts.jpg'
     )
 ]
