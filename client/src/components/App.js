@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import NavBar from "./NavBar";
 
 function App() {
+
   const [cares, setCares] = useState([])
 
   useEffect(() => {

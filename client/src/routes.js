@@ -4,6 +4,8 @@ import Plants from './pages/Plants';
 import Users from './pages/Users';
 import ErrorPage from './pages/ErrorPage';
 import UserProfile from './components/UserProfile'
+import PlantProfile from './pages/PlantProfileComponents/PlantProfile';
+
 
 const routes = [
     {
@@ -20,6 +22,10 @@ const routes = [
                 element: <Plants />
             },
             {
+                path: '/plants/:id',
+                element: <PlantProfile />
+            },
+            {
                 path: '/users',
                 element: <Users />
             },
@@ -27,6 +33,7 @@ const routes = [
                 path: '/profile/:id',
                 element: <UserProfile />
             }
+
         ]
     }
 ];
