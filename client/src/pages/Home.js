@@ -3,14 +3,19 @@ import mini_monstera from '../assets/mini_monstera.jpeg';
 import parlor_palm from '../assets/parlor_palm.jpg';
 import snake_plant from '../assets/snake_plant.jpg';
 import styled from 'styled-components';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 import {
   Grid,
   GridColumn,
   GridRow,
   Image,
-  ImageGroup
+  ImageGroup,
+  Form,
 } from 'semantic-ui-react';
+
+
 
 const WelcomeMessage = styled.div`
   width: 100%;
@@ -35,8 +40,37 @@ const LoginForm = styled.div`
 
 function Home() {
 
-    const wel_mssg = " Welcome, to FloraFriends!"
+    const wel_mssg = " Welcome, to FloraFriends! "
     const sub_mssg = " Connect - Share - Grow "
+
+    const formSchema = yup.object().shape({
+      username: yup.string().max(20).min(3),
+      first_name: yup.string().required('Must enter a name').max(20).min(2),
+      last_name: yup.string().required('Must enter a last name').min(2),
+      password: yup.string()
+    })
+
+    const formik = useFormik({
+      initialValues: {
+        username: '',
+        first_name: '',
+        last_name: '',
+        password: ''
+      },
+      validationSchema: formSchema,
+      onSubmit: (values) => {
+        fetch('/users', {
+          method: 'POST',
+          headers: {
+            'content-type':'application/json'
+          },
+          body: JSON.stringify(values, null, 2),
+        })
+        .then(r => {if (r.status == 201){
+          console.log(r.json())
+        }})
+      }
+    })
 
     return(
       <>
@@ -66,7 +100,24 @@ function Home() {
             <Grid columns={1} style={{justifyContent:'center'}}>
               <GridColumn style={{margin:'2%'}}>
                 <LoginForm>
-                  <p>Log In Form</p>
+                  <Form onSubmit={formik.handleSubmit}>
+                    <Form.Field>
+                      <Form.Input onChange={formik.handleChange} value={formik.values.username} name='username'  label='Username'>
+                      </Form.Input>
+                    </Form.Field>
+                    <Form.Field>
+                      <Form.Input onChange={formik.handleChange} value={formik.values.first_name}  name='first_name' label='First Name' />                      
+                    </Form.Field>
+                    <Form.Field>
+                      <Form.Input onChange={formik.handleChange} value={formik.values.last_name} name='last_name'  label='Last Name' />
+                    </Form.Field>
+                    <Form.Field>
+                      <Form.Input onChange={formik.handleChange} value={formik.values.password} name='password'  label='Password' />
+                    </Form.Field>
+                    <Form.Field>
+                      <Form.Button type='submit' >Create Account</Form.Button>
+                    </Form.Field>
+                  </Form>
                 </LoginForm>
               </GridColumn>
             </Grid>
