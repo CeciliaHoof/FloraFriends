@@ -13,7 +13,7 @@ function PlantCard ({
     image, 
     scientific_name,
     id
-    }) {
+    }) { 
 
     return (
         <Card centered>
