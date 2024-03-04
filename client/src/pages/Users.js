@@ -1,19 +1,23 @@
 import { useState, useEffect } from "react";
+import { useOutletContext } from 'react-router-dom'
 import { Item } from "semantic-ui-react";
 import styled from "styled-components";
 import UserRow from "../components/UserRow";
 import UserFilter from "../components/UserFilter";
 
-const UserContainer = styled.div`
+const MainContainer = styled.div`
   display: flex;
   gap: 10px;
 `;
 const SidebarContainer = styled.div`
   background-color: #88b04b;
-  width: 300px;
+  width: 25%;
   left: 0px;
   padding: 10px;
 `;
+const UserContainer = styled.div`
+  width: 75%;
+`
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -78,20 +82,20 @@ function Users() {
       );
     });
   return (
-    <>
+    <MainContainer>
+      <SidebarContainer>
+        <h2>User Accounts</h2>
+        <UserFilter
+          sortBy={sortBy}
+          onSortSelect={handleSortSelection}
+          onPlantSelect={handlePlantSelection}
+          plants={allPurchasedPlants}
+        />
+      </SidebarContainer>
       <UserContainer>
-        <SidebarContainer>
-          <h2>User Accounts</h2>
-          <UserFilter
-            sortBy={sortBy}
-            onSortSelect={handleSortSelection}
-            onPlantSelect={handlePlantSelection}
-            plants={allPurchasedPlants}
-          />
-        </SidebarContainer>
         <Item.Group divided>{userDisplay}</Item.Group>
       </UserContainer>
-    </>
+    </MainContainer>
   );
 }
 

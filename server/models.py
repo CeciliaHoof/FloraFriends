@@ -105,7 +105,7 @@ class PlantCare(db.Model, SerializerMixin):
     
     user = association_proxy('purchased_plant', 'user')
 
-    serialize_rules = ('-purchased_plant.plant_cares', )
+    serialize_rules = ('-purchased_plant.plant_cares', 'user', '-user.purchased_plants')
 
     def __repr__(self):
         return f'<PlantCare {self.id} | {self.user.username} | {self.purchased_plant.plant} | {self.date}>'
