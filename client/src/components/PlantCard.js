@@ -14,8 +14,10 @@ function PlantCard ({
     common_name, 
     image, 
     scientific_name,
+    imageHeight,
     id
     }) { 
+
     
     const [ inShelf , setInShelf ] = useState(false)
     
@@ -27,6 +29,7 @@ function PlantCard ({
         <Card centered>
             <Image src={image} rounded style={{height: '325px', width: 'auto'}}/>
             <CardContent style={{backgroundColor:'#D2B48C'}}>
+
                 <CardHeader>{common_name}</CardHeader>
                 <CardMeta>{scientific_name}</CardMeta>
                 <NavLink to={`/plants/${id}`}><em>Details</em></NavLink>

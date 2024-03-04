@@ -13,7 +13,7 @@ function PlantContainer({ plants }){
         
         return (
             <GridColumn key={plant.id}> 
-                <PlantCard  {...plant} key={plant.id} /> 
+                <PlantCard  {...plant} imageHeight='325px' key={plant.id} /> 
             </GridColumn>
         )
     }))
