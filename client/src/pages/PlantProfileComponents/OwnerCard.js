@@ -14,7 +14,6 @@ import { Card,
 function OwnerCard({ user }){
 
     return (
-        <GridColumn width={3}>
             <Card style={{backgroundColor:'#F8F8F8'}}>
                 <CardContent>
                     <Image 
@@ -34,7 +33,6 @@ function OwnerCard({ user }){
                     </CardContent>
                 </CardContent>
             </Card>
-        </GridColumn>
     )
 }
 

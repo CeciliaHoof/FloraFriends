@@ -78,7 +78,6 @@ function PlantDetails ({
                     <strong>Winter Hardiness Zone:</strong>  {zone}
                 </p>
             </BottomInfo>
-            
         </DetailContainer>
     )
 };

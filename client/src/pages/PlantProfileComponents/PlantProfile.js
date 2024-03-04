@@ -14,13 +14,15 @@ import {
     Button,
     ButtonContent,
     Icon,
+    CardGroup
 } from 'semantic-ui-react'
 
 const UserTags = styled.div`
     border-radius: 25px;
     margin: 2%;
     width: 95%;
-    display: block;
+    display: auto;
+    flex-direction: column;
     justify-content: center;
     padding: 3%;
     background-color: ${({ customStyles }) => customStyles ? '' : '#88B04B'}
@@ -73,7 +75,7 @@ function PlantProfile () {
                     </GridColumn>
                 </GridRow>
             </Grid>
-            
+
             <Divider />
 
             <Grid columns={2} style={{height:'auto' , marginBottom:'1%' , margin: '2%'}}>
@@ -94,11 +96,13 @@ function PlantProfile () {
                 </GridRow>
             </Grid>
 
-            <Grid columns={6}>
-                <UserTags>
-                    {currOwners ? currOwners : null}
-                </UserTags>
-            </Grid>
+            <UserTags>
+                <CardGroup itemsPerRow={6} >
+                    <>
+                        {currOwners ? currOwners : null}
+                    </>
+                </CardGroup>
+            </UserTags>
             
         </>
     )
