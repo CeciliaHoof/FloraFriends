@@ -50,7 +50,7 @@ class PlantCares(Resource):
             for key, value in care_data.items():
                 setattr(new_plantcare, key, value)
             date_str = care_data['date']
-            care_date = datetime.strptime(date_str, '%m/%d/%Y').date()
+            care_date = datetime.strptime(date_str, '%m-%d-%Y %H:%M:%S')
             new_plantcare.date = care_date
             db.session.add(new_plantcare)
             db.session.commit()
