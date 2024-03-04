@@ -1,4 +1,4 @@
-
+import { NavLink } from 'react-router-dom'
 
 import { 
     Card, 
@@ -8,7 +8,12 @@ import {
     CardContent
     } from 'semantic-ui-react'
 
-function PlantCard ({common_name, image, scientific_name}) {
+function PlantCard ({
+    common_name, 
+    image, 
+    scientific_name,
+    id
+    }) {
 
     return (
         <Card centered>
@@ -16,7 +21,7 @@ function PlantCard ({common_name, image, scientific_name}) {
             <CardContent>
                 <CardHeader>{common_name}</CardHeader>
                 <CardMeta>{scientific_name}</CardMeta>
-                <p>See More Information!</p>
+                <NavLink to={`/plants/${id}`}><em>Details</em></NavLink>
             </CardContent>
         </Card>
         

@@ -21,15 +21,15 @@ function Plants() {
   
     return(
     < >
-      <Header size='huge' textAlign='center' style={{padding:20}}>The Plant Cabinent</Header>
+      <Header size='huge' textAlign='center' style={{padding:20}}>The Plant Cabinet</Header>
       <Divider />
-      <Container>
-        <Header  size='small' textAlign='center' style={{padding:20}}> 
+      
+        <Header  size='small' textAlign='center' style={{margin:20}}> 
           <p>Our Database is expanding!</p>
           <p>If we are missing your favorite plant, let us know.</p>
-        {/* We could Link this bottom part to the Contact Page! */}
+        {/* THOUGHTS: We could Link this bottom part to the Contact Page? */}
         </Header>
-      </Container>
+  
       <PlantContainer plants={plants}  />
     </>
     )
