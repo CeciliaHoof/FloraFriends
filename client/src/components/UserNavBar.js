@@ -23,8 +23,11 @@ function NavBar({ user, updateUser }) {
       <Menu text>
         <PageTitle>{`Welcome ${username}`}</PageTitle>
         <Menu.Menu position="right">
-          <Menu.Item as={NavLink} to={`/profile/:${id}`}>
+          <Menu.Item as={NavLink} to={`/profile/${id}`}>
             View Profile
+          </Menu.Item>
+          <Menu.Item>
+            Manage Account
           </Menu.Item>
           <Menu.Item as={NavLink} to="/" onClick={handleClick}>
             Logout

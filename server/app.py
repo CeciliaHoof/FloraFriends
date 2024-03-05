@@ -82,7 +82,7 @@ class PlantCaresByID(Resource):
                 setattr(plantcare, key, value)
             if 'date' in patch_data.keys():
                 date_str = patch_data['date']
-                care_date = datetime.strptime(date_str, '%m/%d/%Y').date()
+                care_date = datetime.strptime(date_str, '%m-%d-%Y %H:%M:%S')
                 plantcare.date = care_date
             
             db.session.commit()

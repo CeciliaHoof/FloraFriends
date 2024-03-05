@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useFormik } from "formik";
-import * as yup from "yup";
 import red_secret from "../assets/red_secret.jpg";
 import mini_monstera from "../assets/mini_monstera.jpeg";
 import parlor_palm from "../assets/parlor_palm.jpg";

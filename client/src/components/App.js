@@ -7,7 +7,12 @@ import Authenticate from "../pages/Authenticate";
 
 function App() {
   const [user, setUser] = useState(null)
+  const [plantCares, setPlantCares] = useState([])
 
+  const context = {
+    'cares': [plantCares, setPlantCares],
+    'user': user
+  }
   useEffect(() => {
     fetch('/check_session')
     .then(res => {
@@ -20,6 +25,12 @@ function App() {
         setUser(null)
       }
     })
+}, [])
+
+useEffect(() => {
+  fetch('/plant_cares')
+    .then(resp => resp.json())
+    .then(data => setPlantCares(data))
 }, [])
 
   function updateUser(user){
@@ -37,7 +48,7 @@ function App() {
       <Header />
       <NavBar />
       <UserNavBar user={user} updateUser={updateUser}/>
-      <Outlet />
+      <Outlet context={context}/>
     </>)
 }
 
