@@ -27,7 +27,7 @@ function Login({hasAccount, handleChange, updateUser}){
               r.json().then((user) => {
                 updateUser(user);
               });
-            } else if (r.status === 401) {
+            } else if (r.status === 401 || r.status === 404) {
               r.json().then(formik.setErrors('Invalid username and/or password.'))
             }
           });

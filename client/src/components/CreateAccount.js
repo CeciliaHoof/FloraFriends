@@ -21,7 +21,7 @@ function CreateAccount({ hasAccount, handleChange, updateUser}) {
     },
     validationSchema: formSchema,
     onSubmit: (values) => {
-      fetch("/users", {
+      fetch("/signup", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -32,7 +32,7 @@ function CreateAccount({ hasAccount, handleChange, updateUser}) {
           r.json().then((user) => {
             updateUser(user);
           });
-        } else if (r.status === 422){
+        } else if (r.status === 422 || r.status === 401){
           formik.setErrors('Username must be unique')
         }
         }
