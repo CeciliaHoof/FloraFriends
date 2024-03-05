@@ -2,7 +2,7 @@ import React from "react";
 import { Feed, Segment } from "semantic-ui-react";
 import PlantCare from "./PlantCare";
 
-function CareLog({ cares }) {
+function CareLog({ cares, height }) {
 
     const caresDisplay = cares
     .sort((a, b) => {
@@ -15,7 +15,7 @@ function CareLog({ cares }) {
     ))
 
     return (
-        <Segment style={{ height: "500px", overflowY: "auto" }}>
+        <Segment style={{ height: height, overflowY: "auto" }}>
             <Feed>
                 {caresDisplay}
             </Feed>

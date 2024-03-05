@@ -27,7 +27,7 @@ function PlantCard ({
 
     return (
         <Card centered>
-            <Image src={image} rounded style={{height: '325px', width: 'auto'}}/>
+            <Image src={image} rounded style={{height: imageHeight, width: 'auto'}}/>
             <CardContent style={{backgroundColor:'#D2B48C'}}>
 
                 <CardHeader>{common_name}</CardHeader>

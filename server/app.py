@@ -175,9 +175,9 @@ api.add_resource(UsersById, '/users/<int:id>')
 class CheckSession(Resource):
     
     def get(self):
-        user = User.query.filter(User.id == session['user_id']).first()
+        user = User.query.filter(User.id == session.get('user_id')).first()
         if not user:
-            return make_response({}, 204)
+            return make_response({'error': "Unauthorized: you must be logged in to make that request"}, 401)
         else:
             return make_response(user.to_dict(), 200)
 

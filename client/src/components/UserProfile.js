@@ -77,8 +77,8 @@ function UserProfile() {
         </div>
       </UserInfoContainer>
       <PlantCareContainer>
-        <CareLog cares={userCares} />
-        <Card.Group itemsPerRow={6} centered>
+        <CareLog cares={userCares} height='500px'/>
+        <Card.Group itemsPerRow={8} centered>
           {purchasedPlantDisplay}
         </Card.Group>
       </PlantCareContainer>
