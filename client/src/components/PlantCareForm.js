@@ -13,7 +13,7 @@ const initialFormState = {
 
 function PlantCareForm({purchasedPlants, onCareSubmit }) {
   const [formData, setFormData] = useState(initialFormState);
-
+  const [errors, setErrors] = useState([])
   if (!purchasedPlants) {
     return <h1>loading</h1>;
   }
@@ -57,12 +57,21 @@ function PlantCareForm({purchasedPlants, onCareSubmit }) {
             purchased_plant_id: formData.plant
         })
     })
-        .then(resp => resp.json())
-        .then(data => onCareSubmit(data))
-    setFormData(initialFormState)
+      .then(resp => {
+        if (resp.ok){
+          resp.json()
+          .then(data => onCareSubmit(data))
+          setFormData(initialFormState)
+          setErrors([])
+        } else {
+          resp.json()
+          .then(data => setErrors(data))
+        }
+      })
   }
 
   return (
+    <>
     <Form onSubmit={handleSubmit}>
         <Header as='h3'>Add New Plant Care</Header>
       <Form.Field>
@@ -115,6 +124,8 @@ function PlantCareForm({purchasedPlants, onCareSubmit }) {
         <Form.Button>Submit Care</Form.Button>
       </Form.Field>
     </Form>
+    {errors.length > 0 ? <span>{errors}</span> : null}
+    </>
   );
 }
 

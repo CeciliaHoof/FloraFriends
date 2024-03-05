@@ -18,7 +18,8 @@ function PlantCareEdit({
     action: care.type_care,
     comment: care.comment,
   });
-
+  
+  const [errors, setErrors] = useState([])
   const careActions = ["watered", "fertilized", "pruned", "repotted"];
   const careOptions = careActions.map((action) => {
     return { key: action, value: action, text: action };
@@ -65,15 +66,16 @@ function PlantCareEdit({
         if (resp.ok) {
           resp.json().then((data) => {
             onCareEdit(data);
+            handleNotEditClick();
+            setErrors([])
           });
         } else {
-          console.error("Failed to delete care");
+          resp.json().then(data => setErrors(data))
         }
       })
       .catch((error) => {
         console.error("error while deleting care", error);
       });
-    handleNotEditClick();
   }
 
   function handleDelete() {
@@ -96,18 +98,7 @@ function PlantCareEdit({
   return (
     <Feed.Content>
       <Feed.Summary>
-        <Feed.User>{username}</Feed.User>
-        <Dropdown
-          fluid
-          search
-          selection
-          clearable
-          name="plant"
-          value={editedCare.plant}
-          options={plantOptions}
-          onChange={handleChange}
-        />{" "}
-        their{" "}
+        <Feed.User>{username}</Feed.User> {" "}
         <Dropdown
           fluid
           search
@@ -118,6 +109,18 @@ function PlantCareEdit({
           options={careOptions}
           onChange={handleChange}
         />
+        their{" "}
+        <Dropdown
+          fluid
+          search
+          selection
+          clearable
+          name="plant"
+          value={editedCare.plant}
+          options={plantOptions}
+          onChange={handleChange}
+        />
+        
         <Feed.Date>
           <Datetime
             isValidDate={valid}
@@ -138,6 +141,7 @@ function PlantCareEdit({
         <Icon name="save" onClick={handleSave} />
         <Icon name="cancel" onClick={handleNotEditClick} />
         <Icon name="trash alternate outline" onClick={handleDelete} />
+        {errors.length > 0 ? <span>{errors}</span> : null}
       </Feed.Meta>
     </Feed.Content>
   );
