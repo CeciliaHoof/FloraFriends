@@ -54,7 +54,7 @@ class PlantCares(Resource):
             new_plantcare.date = care_date
             db.session.add(new_plantcare)
             db.session.commit()
-
+            
             return make_response(new_plantcare.to_dict(), 201)
         except Exception as e:
             return make_response([str(e)], 422)
