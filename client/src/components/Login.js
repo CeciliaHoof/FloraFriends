@@ -4,8 +4,8 @@ import { Form } from "semantic-ui-react";
 
 function Login({hasAccount, handleChange, updateUser}){
     const formSchema = yup.object().shape({
-        username: yup.string().max(20).min(3),
-        password: yup.string(),
+        username: yup.string().required('Must enter username'),
+        password: yup.string().required('Must enter password')
       });
       const formik = useFormik({
         initialValues: {
@@ -27,6 +27,8 @@ function Login({hasAccount, handleChange, updateUser}){
               r.json().then((user) => {
                 updateUser(user);
               });
+            } else if (r.status === 401) {
+              r.json().then(formik.setErrors('Invalid username and/or password.'))
             }
           });
         },
@@ -41,6 +43,7 @@ function Login({hasAccount, handleChange, updateUser}){
           name="username"
           label="Username"
         ></Form.Input>
+        <p style = {{color: 'red'}}>{formik.errors.username}</p>
       </Form.Field>
       <Form.Field>
         <Form.Input
@@ -49,9 +52,12 @@ function Login({hasAccount, handleChange, updateUser}){
           name="password"
           label="Password"
         />
+        <p style = {{color: 'red'}}>{formik.errors.password}</p>
       </Form.Field>
       <Form.Field>
+      {formik.errors.length > 0 ? <span style={{ color: 'red' }}>{formik.errors}</span> : null}
         <Form.Button type="submit">Login</Form.Button>
+        
         <span onClick={() => handleChange(!hasAccount)}>
           Already have an Account? Click Here!
           </span>
