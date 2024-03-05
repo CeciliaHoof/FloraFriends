@@ -11,11 +11,12 @@ const StyledMenuContainer = styled.div`
   padding-right: 5px;
 `;
 
-function NavBar({ user }) {
+function NavBar({ user, updateUser }) {
     const { username, id } = user
     
     function handleClick(){
         fetch('/logout', {method: 'DELETE'})
+        updateUser(false)
     }
   return (
     <StyledMenuContainer>

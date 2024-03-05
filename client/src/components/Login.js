@@ -33,7 +33,7 @@ function Login({hasAccount, handleChange, updateUser}){
       });
     return(
         <Form onSubmit={formik.handleSubmit}>
-        <h3>Create an Account</h3>
+        <h3>Login</h3>
       <Form.Field>
         <Form.Input
           onChange={formik.handleChange}

@@ -25,6 +25,7 @@ function App() {
   function updateUser(user){
     setUser(user)
   }
+
   if(!user) return (
     <>
       <Header />
@@ -35,7 +36,7 @@ function App() {
     <>
       <Header />
       <NavBar />
-      <UserNavBar user={user}/>
+      <UserNavBar user={user} updateUser={updateUser}/>
       <Outlet />
     </>)
 }
