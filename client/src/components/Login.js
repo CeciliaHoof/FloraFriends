@@ -51,6 +51,7 @@ function Login({hasAccount, handleChange, updateUser}){
           value={formik.values.password}
           name="password"
           label="Password"
+          type="password"
         />
         <p style = {{color: 'red'}}>{formik.errors.password}</p>
       </Form.Field>
