@@ -46,9 +46,18 @@ function App() {
       })}, [])
     
     useEffect(() => {
-      fetch("plants")
+      fetch("/plants")
       .then(r => r.json())
       .then(plants => setPlants(plants))
+    }, [])
+    
+    
+    
+    
+    useEffect(() => {
+      fetch('/plant_cares')
+      .then(resp => resp.json())
+      .then(data => setPlantCares(data))
     }, [])
     
     if(!user) return (
@@ -57,14 +66,6 @@ function App() {
         <Authenticate updateUser={updateUser}/>
       </>
     )
-    
-  
-
-useEffect(() => {
-  fetch('/plant_cares')
-    .then(resp => resp.json())
-    .then(data => setPlantCares(data))
-}, [])
 
   function updateUser(user){
     setUser(user)

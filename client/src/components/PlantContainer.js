@@ -13,7 +13,8 @@ function PlantContainer(){
         purchasedPlantsAll, 
         setPurchasedPlantsAll,
         user,
-        plants} = useOutletContext()
+        plants,
+    } = useOutletContext()
     
     // const [purchasedPlants, setPurchasedPlants] = useState([])
 
@@ -40,7 +41,6 @@ function PlantContainer(){
     }
     
     function handleAddPlant(plant_id){
-        console.log('Before Fetch')
         fetch('/purchased_plants' , {
             method: 'POST',
             headers: {
@@ -55,7 +55,6 @@ function PlantContainer(){
                 r.json()
                 .then(purchased_plant => {
                     setPurchasedPlantsAll([...purchasedPlantsAll, purchased_plant])
-                    console.log('After setPurchasePlant ')
                 })
             } else {
                 console.log('error')
@@ -65,11 +64,9 @@ function PlantContainer(){
 
     const handleRemovePlant = (id) => {
         const purchase_to_remove = ownedPlants.filter((plantPur) => plantPur.plant_id === id)[0]
-        console.log('Starting Remove')
         fetch(`/purchased_plants/${purchase_to_remove.id}` , {
             method: "DELETE",
         })
-        console.log('After Delete Fetch, setting purchased plants')
         setPurchasedPlantsAll(purchasedPlantsAll.filter((plantPur) => plantPur.id !== purchase_to_remove.id))
     }
     console.log(ownedPlants)
@@ -80,11 +77,11 @@ function PlantContainer(){
                 <PlantCard  
                     {...plant} 
                     imageHeight='350px' 
-                    key={plant.id} 
-                    purchasedPlants={purchasedPlantsAll} 
+                    key={plant.id}
                     ownedPlants={plantIDs} 
                     onAddPlant={handleAddPlant} 
-                    onRemovePlant={handleRemovePlant} 
+                    onRemovePlant={handleRemovePlant}
+                    profileID={user.id}
                     /> 
             </GridColumn>
         )

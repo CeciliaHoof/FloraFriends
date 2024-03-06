@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useOutletContext } from 'react-router-dom';
 import {useState ,useEffect }from 'react';
 
 
@@ -19,7 +19,8 @@ function PlantCard ({
     id,
     onAddPlant,
     onRemovePlant,
-    ownedPlants
+    ownedPlants,
+    profileID
     }) { 
         
 
@@ -27,20 +28,19 @@ function PlantCard ({
 
     let [ inShelf , setInShelf ] = useState(false);
 
+    const loggedInUser = useOutletContext().user
+
     useEffect(() => {
         setInShelf(ownedPlants.includes(id));
       }, [ownedPlants , id]);
     
     const handleAddStateChange = () => {
         setInShelf(true)
-        console.log('changed button state, starting add plant')
         onAddPlant(id)
     }
 
     const handleDeleteState = () => {
         setInShelf(false)
-        console.log('changed button state, starting delete plant')
-
         onRemovePlant(id)
     }
 
@@ -54,7 +54,8 @@ function PlantCard ({
                 <CardHeader>{common_name}</CardHeader>
                 <CardMeta>{scientific_name}</CardMeta>
                 <NavLink to={`/plants/${id}`}><em>Details</em></NavLink>
-                <Button 
+
+                {loggedInUser.id === parseInt(profileID) && <Button 
                     size='tiny'
                     floated='right' 
                     style={{
@@ -65,7 +66,8 @@ function PlantCard ({
                     // {inShelf ? onRemovePlant : onAddPlant}    
                         >
                     {inShelf ? "Remove from 'My Shelf'" : "Add to 'My Shelf'"}
-                </Button>
+                </Button>}
+
             </CardContent>
         </Card>
         
