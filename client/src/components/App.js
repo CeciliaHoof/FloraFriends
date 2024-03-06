@@ -6,26 +6,59 @@ import UserNavBar from "./UserNavBar"
 import Authenticate from "../pages/Authenticate";
 
 function App() {
+
   const [user, setUser] = useState(null)
+
+  const [plants, setPlants] = useState([])
   const [plantCares, setPlantCares] = useState([])
 
-  const context = {
+  const [purchasedPlantsAll, setPurchasedPlantsAll] = useState([])
+
+  const contexts = {
+    'user':user,
+    'plants':plants,
+    'purchasedPlantsAll':purchasedPlantsAll,
+    'setPurchasedPlantsAll':setPurchasedPlantsAll,
     'cares': [plantCares, setPlantCares],
-    'user': user
   }
-  useEffect(() => {
-    fetch('/check_session')
-    .then(res => {
-      if(res.ok){
-        res.json()
-        .then(data => {
-          setUser(data)
-        })
-      } else {
-        setUser(null)
-      }
-    })
-}, [])
+    
+    useEffect(() => {
+      fetch('/check_session')
+      .then(res => {
+        if(res.ok){
+          res.json()
+          .then(data => {
+            setUser(data)
+            // getOwnedPlants(data.id)
+          })
+        } else {
+          setUser(null)
+        }
+      })
+    }, [])
+
+    useEffect(() => {
+      fetch('/purchased_plants')
+      .then(r => r.json())
+      .then(purPlants => {
+          console.log('Fetch Finished, starting set for purPlants')
+          setPurchasedPlantsAll(purPlants)
+      })}, [])
+    
+    useEffect(() => {
+      fetch("plants")
+      .then(r => r.json())
+      .then(plants => setPlants(plants))
+    }, [])
+    
+    if(!user) return (
+      <>
+        <Header />
+        <Authenticate updateUser={updateUser}/>
+      </>
+    )
+    
+  
 
 useEffect(() => {
   fetch('/plant_cares')
@@ -37,18 +70,14 @@ useEffect(() => {
     setUser(user)
   }
 
-  if(!user) return (
-    <>
-      <Header />
-      <Authenticate updateUser={updateUser}/>
-    </>
-  )
   return (
     <>
       <Header />
       <NavBar />
       <UserNavBar user={user} updateUser={updateUser}/>
-      <Outlet context={context}/>
+
+      <Outlet context={contexts} />
+
     </>)
 }
 

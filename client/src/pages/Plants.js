@@ -1,7 +1,5 @@
 
-import { useState, useEffect } from "react"
 import { 
-  Container,
   Header,
   Divider
 } from "semantic-ui-react"
@@ -9,15 +7,7 @@ import {
 import PlantContainer from  "../components/PlantContainer"
 
 function Plants() {
-  const [plants, setPlants] = useState([])
 
-  useEffect(() => {
-    fetch("plants")
-      .then(r => r.json())
-      .then(plants => setPlants(plants))
-    }, [])
-
-    
   
     return(
     < >
@@ -30,7 +20,7 @@ function Plants() {
         {/* THOUGHTS: We could Link this bottom part to the Contact Page? */}
         </Header>
   
-      <PlantContainer plants={plants}  />
+      <PlantContainer   />
     </>
     )
 

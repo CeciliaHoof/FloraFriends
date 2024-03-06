@@ -30,6 +30,11 @@ function UserProfile() {
   const params = useParams();
   const userId = params.id;
 
+
+  const { purchasedPlantsAll , setPurchasedPlantsAll } = useOutletContext()
+  
+
+
   useEffect(() => {
     fetch(`/users/${userId}`)
       .then((r) => r.json())
@@ -43,21 +48,67 @@ function UserProfile() {
 
   const allPlantCares = [];
   const purchasedPlantDisplay = [];
+
+  function handleAddPlant(plant_id){
+    console.log('Before Fetch')
+    fetch('/purchased_plants' , {
+        method: 'POST',
+        headers: {
+            'content-type':'application/json'
+        },
+        body: JSON.stringify({
+            'plant_id': plant_id
+        })
+    })
+    .then(r => {
+        if(r.ok){
+            r.json()
+            .then(purchased_plant => {
+                setPurchasedPlantsAll([...purchasedPlantsAll, purchased_plant])
+                console.log('After setPurchasePlant ')
+            })
+        } else {
+            console.log('error')
+        }
+    })
+  }
+
+  
+
   if (user.purchased_plants) {
     const purchasedPlants = user.purchased_plants;
     purchasedPlants.forEach((purchasedPlant) => {
       allPlantCares.push(...purchasedPlant.plant_cares);
     });
-    purchasedPlants.map((purchasedPlant) =>
-      purchasedPlantDisplay.push(
-        <PlantCard
-          {...purchasedPlant.plant}
-          imageHeight="100px"
-          key={purchasedPlant.plant.id}
-        />
-      )
-    );
+
+
+    let ownedPlants = purchasedPlants.filter((purPlant) => purPlant.plant_id)
+    let plantIDs = ownedPlants.map(plant => plant.plant_id)
+
+    purchasedPlants.map((purchasedPlant) => (
+      purchasedPlantDisplay.push(<PlantCard
+        {...purchasedPlant.plant}
+        imageHeight='100px'
+        key={purchasedPlant.plant.id}
+        purchasedPlants={purchasedPlantsAll}
+        ownedPlants={plantIDs}
+        onAddPlant={handleAddPlant}
+        onRemovePlant={handleRemovePlant}
+      />)
+    ));
+
   }
+
+  function handleRemovePlant(id){
+    const purchase_to_remove = purchasedPlantsAll.filter((plantPur) => plantPur.plant_id === id)[0]
+    console.log('Starting Remove')
+    fetch(`/purchased_plants/${purchase_to_remove.id}` , {
+        method: "DELETE",
+    })
+    console.log('After Delete Fetch, setting purchased plants')
+    setPurchasedPlantsAll(purchasedPlantsAll.filter((plantPur) => plantPur.id !== purchase_to_remove.id))
+  }
+
 
   const displayUser = { ...user, plant_cares: allPlantCares };
 

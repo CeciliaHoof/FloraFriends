@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import {useState ,useEffect }from 'react';
+
 
 import { 
     Card, 
@@ -15,15 +16,35 @@ function PlantCard ({
     image, 
     scientific_name,
     imageHeight,
-    id
+    id,
+    onAddPlant,
+    onRemovePlant,
+    ownedPlants
     }) { 
+        
 
+   
+
+    let [ inShelf , setInShelf ] = useState(false);
+
+    useEffect(() => {
+        setInShelf(ownedPlants.includes(id));
+      }, [ownedPlants , id]);
     
-    const [ inShelf , setInShelf ] = useState(false)
-    
-    function handleOnClick(){
-        setInShelf(inShelf => !inShelf)
+    const handleAddStateChange = () => {
+        setInShelf(true)
+        console.log('changed button state, starting add plant')
+        onAddPlant(id)
     }
+
+    const handleDeleteState = () => {
+        setInShelf(false)
+        console.log('changed button state, starting delete plant')
+
+        onRemovePlant(id)
+    }
+
+
 
     return (
         <Card centered>
@@ -40,7 +61,8 @@ function PlantCard ({
                         color:'#FFA7A7', 
                         backgroundColor:'#F8F8F8', 
                         }}
-                    onClick={handleOnClick}    
+                    onClick={inShelf ? handleDeleteState : handleAddStateChange}
+                    // {inShelf ? onRemovePlant : onAddPlant}    
                         >
                     {inShelf ? "Remove from 'My Shelf'" : "Add to 'My Shelf'"}
                 </Button>
