@@ -9,9 +9,11 @@ import {
 } from 'semantic-ui-react'
 
 function PlantContainer(){
-    let user  = useOutletContext().user;
-    let plants = useOutletContext().plants;
-    let { purchasedPlantsAll , setPurchasedPlantsAll } = useOutletContext()
+    let { 
+        purchasedPlantsAll, 
+        setPurchasedPlantsAll,
+        user,
+        plants} = useOutletContext()
     
     // const [purchasedPlants, setPurchasedPlants] = useState([])
 

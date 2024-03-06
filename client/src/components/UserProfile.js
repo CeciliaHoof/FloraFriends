@@ -29,7 +29,7 @@ function UserProfile() {
   const params = useParams();
   const userId = params.id;
 
-  const { purchasedPlantsAll , setPurchasePlantsAll } = useOutletContext()
+  const { purchasedPlantsAll , setPurchasedPlantsAll } = useOutletContext()
   
 
   useEffect(() => {
@@ -48,28 +48,6 @@ function UserProfile() {
 
   const allPlantCares = [];
   const purchasedPlantDisplay = [];
-  if (user.purchased_plants) {
-    const purchasedPlants = user.purchased_plants
-    purchasedPlants.forEach((purchasedPlant) => {
-      allPlantCares.push(...purchasedPlant.plant_cares);
-    });
-
-    let plantIDs = purchasedPlants.filter((purPlant) => purPlant.plant_id)
-
-
-
-    purchasedPlants.map((purchasedPlant) => (
-      purchasedPlantDisplay.push(<PlantCard
-        {...purchasedPlant.plant}
-        imageHeight='100px'
-        key={purchasedPlant.plant.id}
-        purchasedPlants={purchasedPlantsAll}
-        ownedPlants={plantIDs}
-
-
-      />)
-    ));
-  }
 
   function handleAddPlant(plant_id){
     console.log('Before Fetch')
@@ -95,15 +73,41 @@ function UserProfile() {
     })
   }
 
-  const handleRemovePlant = (id) => {
-    const purchase_to_remove = ownedPlants.filter((plantPur) => plantPur.plant_id === id)[0]
+  
+
+  if (user.purchased_plants) {
+    const purchasedPlants = user.purchased_plants
+    purchasedPlants.forEach((purchasedPlant) => {
+      allPlantCares.push(...purchasedPlant.plant_cares);
+    });
+
+    let ownedPlants = purchasedPlants.filter((purPlant) => purPlant.plant_id)
+    let plantIDs = ownedPlants.map(plant => plant.plant_id)
+
+    purchasedPlants.map((purchasedPlant) => (
+      purchasedPlantDisplay.push(<PlantCard
+        {...purchasedPlant.plant}
+        imageHeight='100px'
+        key={purchasedPlant.plant.id}
+        purchasedPlants={purchasedPlantsAll}
+        ownedPlants={plantIDs}
+        onAddPlant={handleAddPlant}
+        onRemovePlant={handleRemovePlant}
+      />)
+    ));
+  }
+
+  function handleRemovePlant(id){
+    const purchase_to_remove = purchasedPlantsAll.filter((plantPur) => plantPur.plant_id === id)[0]
     console.log('Starting Remove')
     fetch(`/purchased_plants/${purchase_to_remove.id}` , {
         method: "DELETE",
     })
     console.log('After Delete Fetch, setting purchased plants')
     setPurchasedPlantsAll(purchasedPlantsAll.filter((plantPur) => plantPur.id !== purchase_to_remove.id))
-  }  
+  }
+
+    
   
 
 
