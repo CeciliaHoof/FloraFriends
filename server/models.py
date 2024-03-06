@@ -98,13 +98,18 @@ class PlantCare(db.Model, SerializerMixin):
     comment = db.Column (db.String)
     date = db.Column(db.DateTime)
     
-    purchased_plant_id = db.Column(db.Integer, db.ForeignKey('purchased_plants.id'))
+    purchased_plant_id = db.Column(db.Integer, db.ForeignKey('purchased_plants.id'), nullable=False)
     purchased_plant = db.relationship('PurchasedPlant', back_populates = 'plant_cares')
     
     user = association_proxy('purchased_plant', 'user')
 
     serialize_rules = ('-purchased_plant.plant_cares', 'user', '-user.purchased_plants')
 
+    @validates('purchased_plant_id')
+    def validates_id(self, key, value):
+        if not value:
+            raise Exception('You must specify which plant you cared for.')
+        return value
     def __repr__(self):
         return f'<PlantCare {self.id} | {self.user.username} | {self.purchased_plant.plant} | {self.date}>'
     

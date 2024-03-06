@@ -1,13 +1,15 @@
 import * as yup from "yup";
-import { useFormik } from "formik";
+import { useFormik, ErrorMessage } from "formik";
 import { Form } from "semantic-ui-react";
+import { useState } from "react";
 
 function CreateAccount({ hasAccount, handleChange, updateUser}) {
+  const [errors, setErrors] = useState('')
   const formSchema = yup.object().shape({
     username: yup.string().max(20).min(3),
     first_name: yup.string().required("Must enter a name").max(20).min(2),
     last_name: yup.string().required("Must enter a last name").min(2),
-    password: yup.string(),
+    password: yup.string().required('Must enter password'),
   });
 
   const formik = useFormik({
@@ -19,7 +21,7 @@ function CreateAccount({ hasAccount, handleChange, updateUser}) {
     },
     validationSchema: formSchema,
     onSubmit: (values) => {
-      fetch("/users", {
+      fetch("/signup", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -30,8 +32,11 @@ function CreateAccount({ hasAccount, handleChange, updateUser}) {
           r.json().then((user) => {
             updateUser(user);
           });
+        } else if (r.status === 422 || r.status === 401){
+          formik.setErrors('Username must be unique')
         }
-      });
+        }
+      );
     },
   });
   return (
@@ -44,6 +49,7 @@ function CreateAccount({ hasAccount, handleChange, updateUser}) {
           name="username"
           label="Username"
         ></Form.Input>
+        <p style = {{color: 'red'}}>{formik.errors.username}</p>
       </Form.Field>
       <Form.Field>
         <Form.Input
@@ -52,6 +58,7 @@ function CreateAccount({ hasAccount, handleChange, updateUser}) {
           name="first_name"
           label="First Name"
         />
+        <p style = {{color: 'red'}}>{formik.errors.first_name}</p>
       </Form.Field>
       <Form.Field>
         <Form.Input
@@ -60,6 +67,7 @@ function CreateAccount({ hasAccount, handleChange, updateUser}) {
           name="last_name"
           label="Last Name"
         />
+        <p style = {{color: 'red'}}>{formik.errors.last_name}</p>
       </Form.Field>
       <Form.Field>
         <Form.Input
@@ -67,9 +75,12 @@ function CreateAccount({ hasAccount, handleChange, updateUser}) {
           value={formik.values.password}
           name="password"
           label="Password"
+          type="password"
         />
+        <p style = {{color: 'red'}}>{formik.errors.password}</p>
       </Form.Field>
       <Form.Field>
+        {formik.errors.length > 0 ? <span style={{ color: 'red' }}>{formik.errors}</span> : null}
         <Form.Button type="submit">Create Account</Form.Button>
         <span onClick={() => handleChange(!hasAccount)}>
           Already have an Account? Click Here!

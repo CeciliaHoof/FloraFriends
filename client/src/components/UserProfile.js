@@ -24,27 +24,27 @@ const PlantCareContainer = styled.div`
 
 function UserProfile() {
   const [user, setUser] = useState({});
-  const [plantCares, setPlantCares] = useState([])
+  const [plantCares, setPlantCares] = useOutletContext().cares;
+  const loggedInUser = useOutletContext().user;
 
   const params = useParams();
   const userId = params.id;
 
+
   const { purchasedPlantsAll , setPurchasedPlantsAll } = useOutletContext()
   
+
 
   useEffect(() => {
     fetch(`/users/${userId}`)
       .then((r) => r.json())
       .then((data) => setUser(data))
       .catch((error) => console.error(error));
-  }, [userId]);
-  
+  }, [userId, plantCares]);
 
-  useEffect(() => {
-    fetch('/plant_cares')
-      .then(resp => resp.json())
-      .then(data => setPlantCares(data))
-  }, [])
+  if (!plantCares || plantCares.length === 0) {
+    return <h1>Loading...</h1>;
+  }
 
   const allPlantCares = [];
   const purchasedPlantDisplay = [];
@@ -76,10 +76,11 @@ function UserProfile() {
   
 
   if (user.purchased_plants) {
-    const purchasedPlants = user.purchased_plants
+    const purchasedPlants = user.purchased_plants;
     purchasedPlants.forEach((purchasedPlant) => {
       allPlantCares.push(...purchasedPlant.plant_cares);
     });
+
 
     let ownedPlants = purchasedPlants.filter((purPlant) => purPlant.plant_id)
     let plantIDs = ownedPlants.map(plant => plant.plant_id)
@@ -95,6 +96,7 @@ function UserProfile() {
         onRemovePlant={handleRemovePlant}
       />)
     ));
+
   }
 
   function handleRemovePlant(id){
@@ -107,27 +109,44 @@ function UserProfile() {
     setPurchasedPlantsAll(purchasedPlantsAll.filter((plantPur) => plantPur.id !== purchase_to_remove.id))
   }
 
-    
-  
-
 
   const displayUser = { ...user, plant_cares: allPlantCares };
 
-  const userCares = plantCares.filter((care) => care.user.id === parseInt(userId))
-  function handleNewPlantCare(plantCare){
-    setPlantCares([...plantCares, plantCare])
+  const userCares = plantCares.filter(
+    (care) => care.user.id === parseInt(userId)
+  );
+
+  function handleNewPlantCare(plantCare) {
+    setPlantCares([...plantCares, plantCare]);
+  }
+
+  function handleDeletePlantCare(plantCare) {
+    const updatedCares = plantCares.filter((c) => c.id !== plantCare.id);
+    setPlantCares(updatedCares);
   }
 
   return (
     <MainContainer>
       <UserInfoContainer>
         <UserDetails user={displayUser} />
-        <div>
-        <PlantCareForm purchasedPlants={displayUser.purchased_plants} onCareSubmit={handleNewPlantCare}/>
-        </div>
+        {parseInt(userId) === loggedInUser.id && (
+          <div>
+            <PlantCareForm
+              purchasedPlants={displayUser.purchased_plants}
+              onCareSubmit={handleNewPlantCare}
+            />
+          </div>
+        )}
       </UserInfoContainer>
       <PlantCareContainer>
-        <CareLog cares={userCares} height='500px'/>
+        <CareLog
+          cares={userCares}
+          height="500px"
+          loggedInUser={loggedInUser}
+          purchasedPlants={displayUser.purchased_plants}
+          onCareSubmit={handleNewPlantCare}
+          onDeleteCare={handleDeletePlantCare}
+        />
         <Card.Group itemsPerRow={8} centered>
           {purchasedPlantDisplay}
         </Card.Group>
