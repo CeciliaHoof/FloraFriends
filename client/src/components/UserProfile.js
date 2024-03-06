@@ -63,10 +63,49 @@ function UserProfile() {
         {...purchasedPlant.plant}
         imageHeight='100px'
         key={purchasedPlant.plant.id}
+        purchasedPlants={purchasedPlantsAll}
         ownedPlants={plantIDs}
+
+
       />)
     ));
   }
+
+  function handleAddPlant(plant_id){
+    console.log('Before Fetch')
+    fetch('/purchased_plants' , {
+        method: 'POST',
+        headers: {
+            'content-type':'application/json'
+        },
+        body: JSON.stringify({
+            'plant_id': plant_id
+        })
+    })
+    .then(r => {
+        if(r.ok){
+            r.json()
+            .then(purchased_plant => {
+                setPurchasedPlantsAll([...purchasedPlantsAll, purchased_plant])
+                console.log('After setPurchasePlant ')
+            })
+        } else {
+            console.log('error')
+        }
+    })
+  }
+
+  const handleRemovePlant = (id) => {
+    const purchase_to_remove = ownedPlants.filter((plantPur) => plantPur.plant_id === id)[0]
+    console.log('Starting Remove')
+    fetch(`/purchased_plants/${purchase_to_remove.id}` , {
+        method: "DELETE",
+    })
+    console.log('After Delete Fetch, setting purchased plants')
+    setPurchasedPlantsAll(purchasedPlantsAll.filter((plantPur) => plantPur.id !== purchase_to_remove.id))
+  }  
+  
+
 
   const displayUser = { ...user, plant_cares: allPlantCares };
 
