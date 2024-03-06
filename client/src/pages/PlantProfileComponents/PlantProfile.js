@@ -63,7 +63,7 @@ function PlantProfile () {
             <Grid columns={2}>
                 <GridRow>
                     <GridColumn width={15}>
-                        <Header size='huge' textAlign='center'>Plant Details</Header>
+                        <Header textAlign='center' style={{fontSize: "30px", padding: "10px"}}>Plant Details</Header>
                     </GridColumn>
                     <GridColumn width={1}>
                         <Button animated style={{width: '95%', }} onClick={handleOnClick}>

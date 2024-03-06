@@ -25,11 +25,12 @@ function OwnerCard({ user }){
                         {user.username}
                     </CardHeader>
                     <CardContent extra>
-                        <div className='ui one button'>
-                            <Button size='mini'>
+                            <Button 
+                            style = {{color:'#FFA7A7', 
+                        backgroundColor:'#F8F8F8'}} size='mini'>
                                 Add Friend!
                             </Button>
-                        </div>
+                        
                     </CardContent>
                 </CardContent>
             </Card>

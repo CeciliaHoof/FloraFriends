@@ -3,5 +3,10 @@
   --header: #fff;
   --link: #61dafb;
   --text: hsla(0, 0%, 100%, 0.88);
+  --background-color: #F8F8F8;
 }
 
+#title {
+  font-family: "Poiret One";
+  font-size: 50px
+}

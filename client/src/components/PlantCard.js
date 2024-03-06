@@ -54,8 +54,9 @@ function PlantCard ({
                 <CardHeader>{common_name}</CardHeader>
                 <CardMeta>{scientific_name}</CardMeta>
                 <NavLink to={`/plants/${id}`}><em>Details</em></NavLink>
-
-                {loggedInUser.id === parseInt(profileID) && <Button 
+            </CardContent>
+                {loggedInUser.id === parseInt(profileID) &&
+                 <Button 
                     size='tiny'
                     floated='right' 
                     style={{
@@ -68,7 +69,7 @@ function PlantCard ({
                     {inShelf ? "Remove from 'My Shelf'" : "Add to 'My Shelf'"}
                 </Button>}
 
-            </CardContent>
+            
         </Card>
         
     )

@@ -1,6 +1,8 @@
+
+
 function Header(){
     return(
-        <h1>FloraFriends</h1>
+        <h1 id='title'>FloraFriends</h1>
     )
 }
 

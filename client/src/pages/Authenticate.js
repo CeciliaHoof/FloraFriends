@@ -51,7 +51,7 @@ function Authenticate({ updateUser }) {
         <WelcomeMessageText> {wel_mssg}</WelcomeMessageText>
         <SubMessageText>{sub_mssg}</SubMessageText>
       </WelcomeMessage>
-
+      
       <Grid columns={2} style={{ justifyContent: "center", padding: "4%" }}>
         <GridColumn width={10}>
           <Grid columns={2}>
