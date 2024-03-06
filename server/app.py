@@ -228,13 +228,9 @@ class PurchasedPlants(Resource):
         else:
             json = request.get_json()
             try:
-                date_str = json['purchased_on']
-                purchased = datetime.strptime(date_str, '%m/%d/%Y').date()
                 purchased_plant = PurchasedPlant(
                     user_id = user.id,
-                    plant_id=json['plant_id'],
-                    purchased_from = json['purchased_from'],
-                    purchased_on = purchased
+                    plant_id=json['plant_id']
                 )
                 db.session.add(purchased_plant)
                 db.session.commit()
@@ -263,7 +259,7 @@ class PurchasedPlantsById(Resource):
         
         return make_response(response_body, status)
     
-    def patch(self,id):
+    def post(self,id):
         purchased_plant = PurchasedPlant.query.filter(PurchasedPlant.id == id).first()
 
         if not purchased_plant:
@@ -275,10 +271,6 @@ class PurchasedPlantsById(Resource):
 
                 for k, v in json.items():
                     setattr(purchased_plant, k, v)
-                if 'purchased_on' in json.keys():
-                    date_str = json['purchased_on']
-                    purchased = datetime.strptime(date_str, '%m/%d/%Y').date()
-                    purchased_plant.purchased_on = purchased
                 db.session.commit()
                 
                 response_body = purchased_plant.to_dict()
