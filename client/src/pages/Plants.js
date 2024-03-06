@@ -11,7 +11,7 @@ function Plants() {
   
     return(
     < >
-      <Header size='huge' textAlign='center' style={{padding:20}}>The Plant Cabinet</Header>
+      <Header textAlign='center' style={{padding:'10px', fontSize: '30px'}}>The Plant Cabinet</Header>
       <Divider />
       
         <Header  size='small' textAlign='center' style={{margin:20}}> 

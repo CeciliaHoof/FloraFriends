@@ -48,9 +48,6 @@ function UserProfile() {
   
   let ownedPlants = purchasedPlantsAll.filter((purPlant) => purPlant.user_id === parseInt(userId))
   let plantIDs = ownedPlants.map(plant => plant.plant_id)
-
-  
-  const allPlantCares = ownedPlants.map((purchasedPlant) => purchasedPlant.plant_cares);
   
   const purchasedPlantDisplay = ownedPlants.map((purchasedPlant) => 
     <PlantCard
@@ -75,7 +72,7 @@ function UserProfile() {
 
 
 
-  const displayUser = { ...user, plant_cares: allPlantCares };
+  
 
   const userCares = plantCares.filter(
     (care) => care.user.id === parseInt(userId)
@@ -89,7 +86,7 @@ function UserProfile() {
     const updatedCares = plantCares.filter((c) => c.id !== plantCare.id);
     setPlantCares(updatedCares);
   }
-
+  const displayUser = { ...user, plant_cares: userCares};
   return (
     <MainContainer>
       <UserInfoContainer>

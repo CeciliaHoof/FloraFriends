@@ -9,6 +9,7 @@ const PageTitle = styled(Menu.Header)`
 const StyledMenuContainer = styled.div`
   margin-top: -1em;
   padding-right: 5px;
+  background-color: #D2B48C
 `;
 
 function NavBar({ user, updateUser }) {
@@ -21,7 +22,7 @@ function NavBar({ user, updateUser }) {
   return (
     <StyledMenuContainer>
       <Menu text>
-        <PageTitle>{`Welcome ${username}`}</PageTitle>
+        <PageTitle>{`Welcome, ${username}!`}</PageTitle>
         <Menu.Menu position="right">
           <Menu.Item as={NavLink} to={`/profile/${id}`}>
             View Profile
