@@ -29,6 +29,7 @@ function UserProfile() {
   const params = useParams();
   const userId = params.id;
 
+  const { purchasedPlantsAll , setPurchasePlantsAll } = useOutletContext()
   
 
   useEffect(() => {
@@ -52,11 +53,17 @@ function UserProfile() {
     purchasedPlants.forEach((purchasedPlant) => {
       allPlantCares.push(...purchasedPlant.plant_cares);
     });
+
+    let plantIDs = purchasedPlants.filter((purPlant) => purPlant.plant_id)
+
+
+
     purchasedPlants.map((purchasedPlant) => (
       purchasedPlantDisplay.push(<PlantCard
         {...purchasedPlant.plant}
         imageHeight='100px'
         key={purchasedPlant.plant.id}
+        ownedPlants={plantIDs}
       />)
     ));
   }

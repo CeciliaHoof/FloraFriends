@@ -1,5 +1,4 @@
 import { useOutletContext } from 'react-router-dom'
-import { useState, useEffect } from 'react'
 import PlantCard from './PlantCard'
 
 
@@ -12,21 +11,22 @@ import {
 function PlantContainer(){
     let user  = useOutletContext().user;
     let plants = useOutletContext().plants;
+    let { purchasedPlantsAll , setPurchasedPlantsAll } = useOutletContext()
     
-    const [purchasedPlants, setPurchasedPlants] = useState([])
+    // const [purchasedPlants, setPurchasedPlants] = useState([])
 
-    useEffect(() => {
-        fetch('/purchased_plants')
-        .then(r => r.json())
-        .then(purPlants => {
-            console.log('Fetch Finished, starting set for purPlants')
-            setPurchasedPlants(purPlants)
-        })}, [])
+    // useEffect(() => {
+    //     fetch('/purchased_plants')
+    //     .then(r => r.json())
+    //     .then(purPlants => {
+    //         console.log('Fetch Finished, starting set for purPlants')
+    //         setPurchasedPlants(purPlants)
+    //     })}, [])
 
 
     
 
-    let ownedPlants = purchasedPlants.filter((plantPur) => plantPur.user_id === user.id)
+    let ownedPlants = purchasedPlantsAll.filter((plantPur) => plantPur.user_id === user.id)
     let plantIDs = ownedPlants.map(plant => { return plant.plant_id})
 
 
@@ -52,10 +52,8 @@ function PlantContainer(){
             if(r.ok){
                 r.json()
                 .then(purchased_plant => {
-                    setPurchasedPlants([...purchasedPlants, purchased_plant])
+                    setPurchasedPlantsAll([...purchasedPlantsAll, purchased_plant])
                     console.log('After setPurchasePlant ')
-
-
                 })
             } else {
                 console.log('error')
@@ -70,7 +68,7 @@ function PlantContainer(){
             method: "DELETE",
         })
         console.log('After Delete Fetch, setting purchased plants')
-        setPurchasedPlants(purchasedPlants.filter((plantPur) => plantPur.id !== purchase_to_remove.id))
+        setPurchasedPlantsAll(purchasedPlantsAll.filter((plantPur) => plantPur.id !== purchase_to_remove.id))
     }
     console.log(ownedPlants)
 
@@ -81,7 +79,7 @@ function PlantContainer(){
                     {...plant} 
                     imageHeight='350px' 
                     key={plant.id} 
-                    purchasedPlants={purchasedPlants} 
+                    purchasedPlants={purchasedPlantsAll} 
                     ownedPlants={plantIDs} 
                     onAddPlant={handleAddPlant} 
                     onRemovePlant={handleRemovePlant} 

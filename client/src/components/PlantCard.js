@@ -31,11 +31,6 @@ function PlantCard ({
         setInShelf(ownedPlants.includes(id));
       }, [ownedPlants , id]);
     
-    // if (ownedPlants.includes(id)){
-    //     setInShelf(true)
-    // }
-
-
     const handleAddStateChange = () => {
         setInShelf(true)
         console.log('changed button state, starting add plant')

@@ -10,9 +10,13 @@ function App() {
   const [user, setUser] = useState(null)
   const [plants, setPlants] = useState([])
 
+  const [purchasedPlantsAll, setPurchasedPlantsAll] = useState([])
+
   const contexts = {
     'user':user,
-    'plants':plants
+    'plants':plants,
+    'purchasedPlantsAll':purchasedPlantsAll,
+    'setPurchasedPlantsAll':setPurchasedPlantsAll
   }
     
     useEffect(() => {
@@ -29,6 +33,14 @@ function App() {
         }
       })
     }, [])
+
+    useEffect(() => {
+      fetch('/purchased_plants')
+      .then(r => r.json())
+      .then(purPlants => {
+          console.log('Fetch Finished, starting set for purPlants')
+          setPurchasedPlantsAll(purPlants)
+      })}, [])
     
     useEffect(() => {
       fetch("plants")
