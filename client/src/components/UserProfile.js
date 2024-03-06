@@ -26,13 +26,11 @@ function UserProfile() {
   const [user, setUser] = useState({});
   const [plantCares, setPlantCares] = useOutletContext().cares;
   const loggedInUser = useOutletContext().user;
+  const { purchasedPlantsAll , setPurchasedPlantsAll } = useOutletContext()
+
 
   const params = useParams();
   const userId = params.id;
-
-
-  const { purchasedPlantsAll , setPurchasedPlantsAll } = useOutletContext()
-  
 
 
   useEffect(() => {
@@ -40,74 +38,41 @@ function UserProfile() {
       .then((r) => r.json())
       .then((data) => setUser(data))
       .catch((error) => console.error(error));
-  }, [userId, plantCares]);
+  }, [userId, plantCares, purchasedPlantsAll]);
 
-  if (!plantCares || plantCares.length === 0) {
+  if (!plantCares && !user && !purchasedPlantsAll) {
     return <h1>Loading...</h1>;
   }
-
-  const allPlantCares = [];
-  const purchasedPlantDisplay = [];
-
-  function handleAddPlant(plant_id){
-    console.log('Before Fetch')
-    fetch('/purchased_plants' , {
-        method: 'POST',
-        headers: {
-            'content-type':'application/json'
-        },
-        body: JSON.stringify({
-            'plant_id': plant_id
-        })
-    })
-    .then(r => {
-        if(r.ok){
-            r.json()
-            .then(purchased_plant => {
-                setPurchasedPlantsAll([...purchasedPlantsAll, purchased_plant])
-                console.log('After setPurchasePlant ')
-            })
-        } else {
-            console.log('error')
-        }
-    })
-  }
+  
+  
+  
+  let ownedPlants = purchasedPlantsAll.filter((purPlant) => purPlant.user_id === parseInt(userId))
+  let plantIDs = ownedPlants.map(plant => plant.plant_id)
 
   
-
-  if (user.purchased_plants) {
-    const purchasedPlants = user.purchased_plants;
-    purchasedPlants.forEach((purchasedPlant) => {
-      allPlantCares.push(...purchasedPlant.plant_cares);
-    });
-
-
-    let ownedPlants = purchasedPlants.filter((purPlant) => purPlant.plant_id)
-    let plantIDs = ownedPlants.map(plant => plant.plant_id)
-
-    purchasedPlants.map((purchasedPlant) => (
-      purchasedPlantDisplay.push(<PlantCard
-        {...purchasedPlant.plant}
-        imageHeight='100px'
-        key={purchasedPlant.plant.id}
-        purchasedPlants={purchasedPlantsAll}
-        ownedPlants={plantIDs}
-        onAddPlant={handleAddPlant}
-        onRemovePlant={handleRemovePlant}
-      />)
-    ));
-
-  }
-
+  const allPlantCares = ownedPlants.map((purchasedPlant) => purchasedPlant.plant_cares);
+  
+  const purchasedPlantDisplay = ownedPlants.map((purchasedPlant) => 
+    <PlantCard
+      {...purchasedPlant.plant}
+      imageHeight='100px'
+      key={purchasedPlant.plant.id}
+      ownedPlants={plantIDs}
+      onRemovePlant={handleRemovePlant}
+      profileID={userId}
+    />
+  );
+  
   function handleRemovePlant(id){
     const purchase_to_remove = purchasedPlantsAll.filter((plantPur) => plantPur.plant_id === id)[0]
-    console.log('Starting Remove')
+  
     fetch(`/purchased_plants/${purchase_to_remove.id}` , {
         method: "DELETE",
     })
-    console.log('After Delete Fetch, setting purchased plants')
-    setPurchasedPlantsAll(purchasedPlantsAll.filter((plantPur) => plantPur.id !== purchase_to_remove.id))
+    const newPurchPlants = (purchasedPlantsAll.filter((plantPur) => plantPur.id !== purchase_to_remove.id))
+    setPurchasedPlantsAll(newPurchPlants)
   }
+
 
 
   const displayUser = { ...user, plant_cares: allPlantCares };
@@ -138,6 +103,7 @@ function UserProfile() {
           </div>
         )}
       </UserInfoContainer>
+
       <PlantCareContainer>
         <CareLog
           cares={userCares}
@@ -151,6 +117,7 @@ function UserProfile() {
           {purchasedPlantDisplay}
         </Card.Group>
       </PlantCareContainer>
+
     </MainContainer>
   );
 }

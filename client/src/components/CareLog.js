@@ -9,6 +9,10 @@ function CareLog({
   purchasedPlants,
   onDeleteCare,
 }) {
+  if (!cares){
+    return <h1>Loading</h1>
+  }
+
   const caresDisplay = cares
     .sort((a, b) => {
       const dateA = new Date(a.date);
