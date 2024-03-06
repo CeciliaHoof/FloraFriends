@@ -31,10 +31,10 @@ function Home() {
   const [plantCares, setPlantCares] = useOutletContext().cares;
   const loggedInUser = useOutletContext().user;
 
-  if (!plantCares || !loggedInUser) {
+  if (!plantCares && !loggedInUser) {
     return <h1>loading</h1>;
   }
-
+  console.log(plantCares)
   function handleDeletePlantCare(plantCare) {
     const updatedCares = plantCares.filter((c) => c.id !== plantCare.id);
     setPlantCares(updatedCares);

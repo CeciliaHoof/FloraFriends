@@ -9,7 +9,7 @@ function CareLog({
   purchasedPlants,
   onDeleteCare,
 }) {
-  if (!cares){
+  if (cares.error){
     return <h1>Loading</h1>
   }
 
