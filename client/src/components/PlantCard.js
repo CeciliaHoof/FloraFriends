@@ -29,7 +29,7 @@ function PlantCard ({
 
     useEffect(() => {
         setInShelf(ownedPlants.includes(id));
-      }, [ownedPlants, id]);
+      }, [ownedPlants , id]);
     
     // if (ownedPlants.includes(id)){
     //     setInShelf(true)

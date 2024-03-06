@@ -27,6 +27,8 @@ function Login({hasAccount, handleChange, updateUser}){
               r.json().then((user) => {
                 updateUser(user);
               });
+            } else {
+              console.log(r)
             }
           });
         },
