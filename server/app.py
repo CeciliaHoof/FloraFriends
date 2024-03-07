@@ -15,10 +15,11 @@ from config import app, db, api
 from models import *
 
 # Views go here!
-# @app.before_request
-# def check_if_logged_in():
-#     if not session['user_id'] and request.endpoint != 'signup' and request.endpoint !='login' and request.endpoint !='check_session':
-#         return {'error': 'Unauthorized'}, 401
+allowed_endpoints = ['signup', 'login', 'check_session']
+@app.before_request
+def check_if_logged_in():
+    if not session['user_id'] and request.endpoint not in allowed_endpoints:
+        return {'error': 'Unauthorized'}, 401
 
 class Plants(Resource):
 

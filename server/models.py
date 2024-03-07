@@ -31,6 +31,7 @@ class User(db.Model, SerializerMixin):
     first_name = db.Column(db.String, nullable=False)
     last_name = db.Column(db.String, nullable = False)
     username = db.Column(db.String, unique = True, nullable = False)
+    bio = db.Column(db.String)
     _password_hash = db.Column(db.String)
 
     purchased_plants = db.relationship('PurchasedPlant', back_populates = 'user', cascade='all, delete')
