@@ -5,6 +5,7 @@ import Users from './pages/Users';
 import ErrorPage from './pages/ErrorPage';
 import UserProfile from './components/UserProfile'
 import PlantProfile from './pages/PlantProfileComponents/PlantProfile';
+import ManageAccount from './components/ManageAccount';
 
 
 const routes = [
@@ -32,6 +33,10 @@ const routes = [
             {
                 path: '/profile/:id',
                 element: <UserProfile />
+            },
+            {
+                path: '/manage_account/:id',
+                element: <ManageAccount />
             }
 
         ]

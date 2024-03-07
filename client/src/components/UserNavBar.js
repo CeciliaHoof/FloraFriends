@@ -27,7 +27,7 @@ function NavBar({ user, updateUser }) {
           <Menu.Item as={NavLink} to={`/profile/${id}`}>
             View Profile
           </Menu.Item>
-          <Menu.Item>
+          <Menu.Item as={NavLink} to={`/manage_account/${id}`}>
             Manage Account
           </Menu.Item>
           <Menu.Item as={NavLink} to="/" onClick={handleClick}>
