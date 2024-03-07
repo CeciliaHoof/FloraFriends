@@ -18,7 +18,7 @@ from models import *
 allowed_endpoints = ['signup', 'login', 'check_session']
 @app.before_request
 def check_if_logged_in():
-    if not session['user_id'] and request.endpoint not in allowed_endpoints:
+    if not session.get('user_id') and request.endpoint not in allowed_endpoints:
         return {'error': 'Unauthorized'}, 401
 
 class Plants(Resource):

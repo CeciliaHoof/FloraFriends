@@ -25,7 +25,7 @@ const UserTags = styled.div`
     flex-direction: column;
     justify-content: center;
     padding: 3%;
-    background-color: ${({ customStyles }) => customStyles ? '' : '#88B04B'}
+    background-color: #D2B48C
 `;
 
 
