@@ -2,11 +2,9 @@ import user_img_placeholder from '../../assets/user_img_placeholder.jpg'
 
 import { Card, 
     CardContent,
-    CardMeta,
     CardHeader,
     Button,
-    Image,
-    GridColumn    
+    Image,   
 } from 'semantic-ui-react'
 
 

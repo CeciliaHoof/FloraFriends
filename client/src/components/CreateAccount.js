@@ -1,7 +1,6 @@
 import * as yup from "yup";
-import { useFormik, ErrorMessage } from "formik";
+import { useFormik } from "formik";
 import { Form } from "semantic-ui-react";
-import { useState } from "react";
 
 function CreateAccount({ hasAccount, handleChange, updateUser}) {
   const formSchema = yup.object().shape({

@@ -11,10 +11,8 @@ import styled from "styled-components";
 import {
   Grid,
   GridColumn,
-  GridRow,
   Image,
   ImageGroup,
-  Form,
 } from "semantic-ui-react";
 
 const WelcomeMessage = styled.div`
