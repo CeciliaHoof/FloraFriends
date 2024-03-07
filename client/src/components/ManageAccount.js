@@ -1,40 +1,41 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Button, Form } from "semantic-ui-react";
+import { useParams, useOutletContext } from "react-router-dom";
+import { Button } from "semantic-ui-react";
 import EditProfile from "./EditProfile";
+import ChangePassword from "./ChangePassword";
+import DeleteAccount from "./DeleteAccount";
 
 function ManageAccount() {
-  const [user, setUser] = useState({});
+  const user = useOutletContext().user
+  const setUser = useOutletContext().setUser
   const [editProfile, setEditProfile] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
   const [deleteAccount, setDeleteAccount] = useState(false);
-
-  const params = useParams();
-  const userId = params.id;
-
-  useEffect(() => {
-    fetch(`/users/${userId}`)
-      .then((r) => r.json())
-      .then((data) => setUser(data))
-      .catch((error) => console.error(error));
-  }, [userId]);
+  const [changeSuccessful, setChangeSuccessful] = useState(false)
 
   function handleEdit() {
     setEditProfile(!editProfile);
     setChangePassword(false);
     setDeleteAccount(false);
+    setChangeSuccessful(false)
   }
 
   function handlePassword() {
     setChangePassword(!changePassword);
     setEditProfile(false);
     setDeleteAccount(false);
+    setChangeSuccessful(false)
   }
 
   function handleDelete() {
     setDeleteAccount(!deleteAccount);
     setChangePassword(false);
     setEditProfile(false);
+    setChangeSuccessful(false)
+  }
+
+  function handlePatch(){
+    setChangeSuccessful(true)
   }
 
   return (
@@ -66,9 +67,10 @@ function ManageAccount() {
       >
         Delete Account
       </Button>
-      {editProfile && <EditProfile setEditProfile={setEditProfile} user={user} updateUser={setUser}/>}
-      {changePassword && <h2>Change Password</h2>}
-      {deleteAccount && <h2>Delete Account</h2>}
+      {editProfile && <EditProfile setEditProfile={setEditProfile} user={user} updateUser={setUser} onSuccessfulPatch={handlePatch}/>}
+      {changePassword && <ChangePassword setChangePassword={setChangePassword} user={user} updateUser={setUser} onSuccessfulPatch={handlePatch}/>}
+      {deleteAccount && <DeleteAccount user={user} setUser={setUser}/>}
+      {changeSuccessful && <h3>Account Changes Successful</h3>}
     </>
   );
 }

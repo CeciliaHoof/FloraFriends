@@ -12,7 +12,7 @@ const StyledMenuContainer = styled.div`
   background-color: #D2B48C
 `;
 
-function NavBar({ user, updateUser }) {
+function UserNavBar({ user, updateUser }) {
     const { username, id } = user
     
     function handleClick(){
@@ -39,4 +39,4 @@ function NavBar({ user, updateUser }) {
   );
 }
 
-export default NavBar;
+export default UserNavBar;

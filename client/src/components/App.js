@@ -16,6 +16,7 @@ function App() {
 
   const contexts = {
     'user':user,
+    'setUser': setUser,
     'plants':plants,
     'purchasedPlantsAll':purchasedPlantsAll,
     'setPurchasedPlantsAll':setPurchasedPlantsAll,
@@ -29,7 +30,6 @@ function App() {
           res.json()
           .then(data => {
             setUser(data)
-            // getOwnedPlants(data.id)
           })
         } else {
           setUser(null)

@@ -4,7 +4,6 @@ import { Form } from "semantic-ui-react";
 import { useState } from "react";
 
 function CreateAccount({ hasAccount, handleChange, updateUser}) {
-  const [errors, setErrors] = useState('')
   const formSchema = yup.object().shape({
     username: yup.string().max(20).min(3),
     first_name: yup.string().required("Must enter a name").max(20).min(2),
