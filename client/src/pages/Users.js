@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { useOutletContext } from 'react-router-dom'
-import { Item } from "semantic-ui-react";
+import { useState } from "react";
+import { Item, Segment } from "semantic-ui-react";
 import styled from "styled-components";
 import UserRow from "../components/UserRow";
 import UserFilter from "../components/UserFilter";
+import { useOutletContext } from "react-router-dom";
 
 const MainContainer = styled.div`
   display: flex;
@@ -20,15 +20,9 @@ const UserContainer = styled.div`
 `
 
 function Users() {
-  const [users, setUsers] = useState([]);
+  const users = useOutletContext().users
   const [filterPlant, setFilterPlant] = useState('');
   const [sortBy, setSortBy] = useState("");
-
-  useEffect(() => {
-    fetch("users")
-      .then((resp) => resp.json())
-      .then((data) => setUsers(data))
-  }, []);
 
   function handleSortSelection(sortSelection) {
     setSortBy(sortSelection);
@@ -71,6 +65,9 @@ function Users() {
       else if (sortBy === "cares"){
         return user2.plant_cares.length - user1.plant_cares.length;
       }
+      else {
+        return 0
+      }
     })
     .map((user) => {
       return (
@@ -93,7 +90,9 @@ function Users() {
         />
       </SidebarContainer>
       <UserContainer>
+        <Segment style={{ height: "80vh", overflowY: "auto" }}>
         <Item.Group divided>{userDisplay}</Item.Group>
+        </Segment>
       </UserContainer>
     </MainContainer>
   );

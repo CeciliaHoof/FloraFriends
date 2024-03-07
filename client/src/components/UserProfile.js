@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useOutletContext } from "react-router-dom";
-import { Card } from "semantic-ui-react";
+import { Card, Segment } from "semantic-ui-react";
 import styled from "styled-components";
 import UserDetails from "./UserDetails";
 import CareLog from "./CareLog";
@@ -10,6 +10,7 @@ import PlantCareForm from "./PlantCareForm";
 const MainContainer = styled.div`
   display: flex;
   gap: 10px;
+  height: 80vh;
 `;
 const UserInfoContainer = styled.div`
   background-color: #88b04b;
@@ -19,7 +20,6 @@ const UserInfoContainer = styled.div`
 `;
 const PlantCareContainer = styled.div`
   width: 75%;
-  margin-right: 10px;
 `;
 
 function UserProfile() {
@@ -104,15 +104,17 @@ function UserProfile() {
       <PlantCareContainer>
         <CareLog
           cares={userCares}
-          height="500px"
+          height="39vh"
           loggedInUser={loggedInUser}
           purchasedPlants={displayUser.purchased_plants}
           onCareSubmit={handleNewPlantCare}
           onDeleteCare={handleDeletePlantCare}
         />
-        <Card.Group itemsPerRow={8} centered>
+        <Segment style={{height: '39vh', overflowY: "auto"}}>
+        <Card.Group itemsPerRow={6} centered>
           {purchasedPlantDisplay}
         </Card.Group>
+        </Segment>
       </PlantCareContainer>
 
     </MainContainer>
