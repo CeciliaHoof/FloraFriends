@@ -49,7 +49,7 @@ function PlantProfile () {
                 const owners = plant_owners.map((owner) => <OwnerCard {...owner} />)
                 setCurrOwners(owners) 
             }
-        })}, [id])
+        })}, [id, singlePlant])
 
     const navigate = useNavigate()
 

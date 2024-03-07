@@ -1,9 +1,7 @@
 import { 
     Container,
     Divider,
-    Header,
-    Segment
-
+    Header
 } from 'semantic-ui-react';
 import styled from 'styled-components';
 

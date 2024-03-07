@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
 import CareLog from "../components/CareLog";
 import { useOutletContext } from "react-router-dom";
 

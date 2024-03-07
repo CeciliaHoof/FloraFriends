@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useParams, useOutletContext } from "react-router-dom";
+import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import { Button } from "semantic-ui-react";
 import EditProfile from "./EditProfile";
 import ChangePassword from "./ChangePassword";
