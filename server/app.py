@@ -135,6 +135,8 @@ class UsersById(Resource):
             try:
                 for k, v in request_json.items():
                     setattr(user, k, v)
+                if 'password' in request_json.keys():
+                    user.password_hash = request_json['password']
                 db.session.commit()
                 response_message = user.to_dict()
                 status = 202

@@ -26,8 +26,7 @@ function UserDetails({ user }) {
          </StyledSpan>
         {/* <span>❤️ {plant_cares} </span> */}
         <p>
-          <strong>Bio:</strong> We need to add this to the back end. But this is
-          where the bio would be rendered once we add it.
+          <strong>Bio:</strong>
         </p>
     </>
   );
