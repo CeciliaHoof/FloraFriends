@@ -41,24 +41,20 @@ function App() {
       fetch('/purchased_plants')
       .then(r => r.json())
       .then(purPlants => {
-          console.log('Fetch Finished, starting set for purPlants')
           setPurchasedPlantsAll(purPlants)
-      })}, [])
+      })}, [user])
     
     useEffect(() => {
       fetch("/plants")
       .then(r => r.json())
       .then(plants => setPlants(plants))
-    }, [])
-    
-    
-    
+    }, [user])
     
     useEffect(() => {
       fetch('/plant_cares')
       .then(resp => resp.json())
       .then(data => setPlantCares(data))
-    }, [])
+    }, [user])
     
     if(!user) return (
       <>
