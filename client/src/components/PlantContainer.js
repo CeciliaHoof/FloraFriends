@@ -15,16 +15,6 @@ function PlantContainer(){
         user,
         plants,
     } = useOutletContext()
-    
-    // const [purchasedPlants, setPurchasedPlants] = useState([])
-
-    // useEffect(() => {
-    //     fetch('/purchased_plants')
-    //     .then(r => r.json())
-    //     .then(purPlants => {
-    //         console.log('Fetch Finished, starting set for purPlants')
-    //         setPurchasedPlants(purPlants)
-    //     })}, [])
 
 
     
@@ -69,7 +59,6 @@ function PlantContainer(){
         })
         setPurchasedPlantsAll(purchasedPlantsAll.filter((plantPur) => plantPur.id !== purchase_to_remove.id))
     }
-    console.log(ownedPlants)
 
     let plant_cards = plants.map((plant => { 
         return (

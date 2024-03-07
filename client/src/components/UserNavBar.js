@@ -3,13 +3,8 @@ import { Menu } from "semantic-ui-react";
 import styled from "styled-components";
 
 const PageTitle = styled(Menu.Header)`
-  font-size: 20px;
+  font-size: 18px;
   padding: 15px;
-`;
-const StyledMenuContainer = styled.div`
-  margin-top: -1em;
-  padding-right: 5px;
-  background-color: #D2B48C
 `;
 
 function UserNavBar({ user, updateUser }) {
@@ -20,8 +15,7 @@ function UserNavBar({ user, updateUser }) {
         updateUser(false)
     }
   return (
-    <StyledMenuContainer>
-      <Menu text>
+      <Menu text style={{marginTop: '0px', backgroundColor: '#D2B48C', paddingLeft: '2px'}}>
         <PageTitle>{`Welcome, ${username}!`}</PageTitle>
         <Menu.Menu position="right">
           <Menu.Item as={NavLink} to={`/profile/${id}`}>
@@ -35,7 +29,6 @@ function UserNavBar({ user, updateUser }) {
           </Menu.Item>
         </Menu.Menu>
       </Menu>
-    </StyledMenuContainer>
   );
 }
 

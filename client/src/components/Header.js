@@ -2,7 +2,7 @@
 
 function Header(){
     return(
-        <h1 id='title'>FloraFriends</h1>
+        <h1 id='title' style={{marginBottom: '0px', paddingLeft: '7px'}}>FloraFriends</h1>
     )
 }
 

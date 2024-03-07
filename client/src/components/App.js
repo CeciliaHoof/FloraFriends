@@ -8,7 +8,7 @@ import Authenticate from "../pages/Authenticate";
 function App() {
 
   const [user, setUser] = useState(null)
-
+  const [users, setUsers] = useState([])
   const [plants, setPlants] = useState([])
   const [plantCares, setPlantCares] = useState([])
 
@@ -21,6 +21,7 @@ function App() {
     'purchasedPlantsAll':purchasedPlantsAll,
     'setPurchasedPlantsAll':setPurchasedPlantsAll,
     'cares': [plantCares, setPlantCares],
+    'users': users
   }
     
     useEffect(() => {
@@ -55,6 +56,12 @@ function App() {
       .then(resp => resp.json())
       .then(data => setPlantCares(data))
     }, [user])
+
+    useEffect(() => {
+      fetch('/users')
+      .then(resp => resp.json())
+      .then(data => setUsers(data))
+    }, [user])
     
     if(!user) return (
       <>
@@ -68,14 +75,22 @@ function App() {
   }
 
   return (
-    <>
-      <Header />
-      <NavBar />
-      <UserNavBar user={user} updateUser={updateUser}/>
-
-      <Outlet context={contexts} />
-
-    </>)
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', gap:'0px' }}>
+  <div style={{ height: '20%', display:'flex', flexDirection: 'column', gap:'0px'  }}>
+    <div style={{height:'40%'}}>
+    <Header />
+    </div>
+    <div style={{height:'25%'}}>
+    <NavBar />
+    </div>
+    <div style={{height:'20%'}}>
+    <UserNavBar user={user} updateUser={updateUser}/>
+    </div>
+  </div>
+  <div style={{ height: '80%' }}>
+    <Outlet context={contexts} />
+  </div>
+</div>)
 }
 
 export default App;

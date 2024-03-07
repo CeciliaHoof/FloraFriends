@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import { Dropdown, Form, Checkbox } from "semantic-ui-react"
 
 function UserFilter({ sortBy, onSortSelect, onPlantSelect, plants}){

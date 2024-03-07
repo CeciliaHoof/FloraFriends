@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Feed, Icon, Image } from "semantic-ui-react";
+import { DateTime } from "luxon";
 import PlantCareEdit from "./PlantCareEdit";
 
 function PlantCare({ care, loggedInUser, purchasedPlants, onDeleteCare }) {
@@ -7,12 +8,9 @@ function PlantCare({ care, loggedInUser, purchasedPlants, onDeleteCare }) {
   const { user, date, type_care, purchased_plant, comment } = careDis;
 
   const parsedDate = new Date(date);
-  const formattedDate = `${(parsedDate.getMonth() + 1)
-    .toString()
-    .padStart(2, "0")}-${parsedDate
-    .getDate()
-    .toString()
-    .padStart(2, "0")}-${parsedDate.getFullYear()}`;
+
+  const formattedDate =
+    DateTime.fromJSDate(parsedDate).toFormat("dd-MM-yyyy HH:mm z");
 
   const [isEditing, setIsEditing] = useState(false);
 
