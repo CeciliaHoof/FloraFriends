@@ -6,7 +6,7 @@ function CareLogFilter({ plants, users, onPlantSelect, onUserSearch }) {
   });
 
   const userOptions = users.map(user => {
-    return {key: user.id, value: user.id, text:user.username}
+    return {key: user, value: user, text:user}
   })
   return (
     <>

@@ -22,13 +22,10 @@ const CareLogContainer = styled.div`
 function Home() {
   const [filterPlant, setFilterPlant] = useState("");
   const [searchUser, setSearchUser] = useState("");
-
   const [plantCares, setPlantCares] = useOutletContext().cares;
-  const purchasedPlantsAll = useOutletContext().purchasedPlantsAll;
-  const users = useOutletContext().users;
   const loggedInUser = useOutletContext().user;
 
-  if (!plantCares && !loggedInUser) {
+  if (plantCares.error) {
     return <h1>loading</h1>;
   }
 
@@ -39,7 +36,13 @@ function Home() {
 
   const purchasedPlants = [
     ...new Set(
-      purchasedPlantsAll.map((purPlant) => purPlant.plant.common_name)
+      plantCares.map((plantCare) => plantCare.purchased_plant.plant.common_name)
+    ),
+  ];
+
+  const users = [
+    ...new Set(
+      plantCares.map((plantCare) => plantCare.user.username)
     ),
   ];
 
@@ -48,9 +51,9 @@ function Home() {
       return filterPlant === "" || care.purchased_plant.plant.common_name.includes(filterPlant)
     })
     .filter(care => {
-      return searchUser === "" || care.user.id === searchUser
+      return searchUser === "" || care.user.username === searchUser
     })
-
+    
   return (
     <MainContainer>
       <SidebarContainer>
