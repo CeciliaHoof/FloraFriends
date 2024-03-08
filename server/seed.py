@@ -55,16 +55,4 @@ if __name__ == '__main__':
 
         print("Seeding plant cares...")
 
-        plant_cares = []
-
-        for _ in range(30):
-            care = PlantCare(
-                purchased_plant_id = randint(1, 30),
-                type_care = 'watering',
-                comment = fake.sentence(),
-                date = fake.date_this_decade()
-            )
-            plant_cares.append(care)
-        
-        db.session.add_all(plant_cares)
         db.session.commit()
