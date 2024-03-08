@@ -1,9 +1,11 @@
+
+
 # FloraFriends
 
 
 Welcome to FloraFriends, your next social media destination! Create an account, add plants to your shelf, and keep a log of your plant care! With version 1, you are able to see all users and their respective plants. Within your own personal profile, you are able to keep a record of your own care logs. Whether you are pruning, watering, fertilizing, or repotting you can have a convienent record to reflect on if needed.
 
-
+<img width="1440" alt="Home" src='/Users/jvance/Development/code/Phase-4/FloraFriends/photo4read/Screenshot 2024-03-08 at 10.55.15 AM.png'>
 
 ## Getting Started
 
@@ -44,3 +46,10 @@ If you have completed the server side commands and have the server side up and r
 
     npm start
 
+
+## Future Development
+
+- Introduce a 'friends' table to enable connectivity
+- Introduce photo technology to allow users to upload a photo to their care log/profile
+- Expand plant database
+- Allowing users to comment/like a plant care

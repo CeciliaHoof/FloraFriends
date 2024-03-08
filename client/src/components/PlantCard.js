@@ -23,9 +23,6 @@ function PlantCard ({
     profileID
     }) { 
         
-
-   
-
     let [ inShelf , setInShelf ] = useState(false);
 
     const loggedInUser = useOutletContext().user
@@ -44,11 +41,9 @@ function PlantCard ({
         onRemovePlant(id)
     }
 
-
-
     return (
         <Card centered>
-            <Image src={image} rounded style={{height: imageHeight, width: 'auto'}}/>
+            <Image src={image} alt={common_name} rounded style={{height: imageHeight, width: 'auto'}}/>
             <CardContent style={{backgroundColor:'#D2B48C'}}>
 
                 <CardHeader>{common_name}</CardHeader>
@@ -63,13 +58,10 @@ function PlantCard ({
                         color:'#FFA7A7', 
                         backgroundColor:'#F8F8F8', 
                         }}
-                    onClick={inShelf ? handleDeleteState : handleAddStateChange}
-                    // {inShelf ? onRemovePlant : onAddPlant}    
+                    onClick={inShelf ? handleDeleteState : handleAddStateChange}    
                         >
                     {inShelf ? "Remove from 'My Shelf'" : "Add to 'My Shelf'"}
                 </Button>}
-
-            
         </Card>
         
     )

@@ -25,6 +25,7 @@ function PlantCare({ care, loggedInUser, purchasedPlants, onDeleteCare }) {
   if (!purchased_plant) {
     <h1>loading</h1>;
   }
+  
   return (
     <Feed.Event>
       <Feed.Label>

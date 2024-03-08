@@ -45,7 +45,6 @@ function UserProfile() {
   }
   
   
-  
   let ownedPlants = purchasedPlantsAll.filter((purPlant) => purPlant.user_id === parseInt(userId))
   let plantIDs = ownedPlants.map(plant => plant.plant_id)
   
@@ -61,7 +60,7 @@ function UserProfile() {
   );
   
   function handleRemovePlant(id){
-    const purchase_to_remove = purchasedPlantsAll.filter((plantPur) => plantPur.plant_id === id)[0]
+    const purchase_to_remove = ownedPlants.filter((plantPur) => plantPur.plant_id === id)[0]
   
     fetch(`/purchased_plants/${purchase_to_remove.id}` , {
         method: "DELETE",
@@ -69,10 +68,6 @@ function UserProfile() {
     const newPurchPlants = (purchasedPlantsAll.filter((plantPur) => plantPur.id !== purchase_to_remove.id))
     setPurchasedPlantsAll(newPurchPlants)
   }
-
-
-
-  
 
   const userCares = plantCares.filter(
     (care) => care.user.id === parseInt(userId)
@@ -87,6 +82,8 @@ function UserProfile() {
     setPlantCares(updatedCares);
   }
   const displayUser = { ...user, plant_cares: userCares};
+
+
   return (
     <MainContainer>
       <UserInfoContainer>
@@ -100,7 +97,6 @@ function UserProfile() {
           </div>
         )}
       </UserInfoContainer>
-
       <PlantCareContainer>
         <CareLog
           cares={userCares}
@@ -116,7 +112,6 @@ function UserProfile() {
         </Card.Group>
         </Segment>
       </PlantCareContainer>
-
     </MainContainer>
   );
 }

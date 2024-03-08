@@ -83,7 +83,7 @@ function PlantProfile () {
                     <GridColumn 
                         width={6} 
                         textAlign='center'>
-                            <Image  size='large' src={singlePlant.image}  />
+                            <Image  size='large' alt={singlePlant.common_name} src={singlePlant.image}  />
                     </GridColumn>
                     <GridColumn 
                         width={10} 
