@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Item, Segment } from "semantic-ui-react";
 import styled from "styled-components";
 import UserRow from "../components/UserRow";
 import UserFilter from "../components/UserFilter";
-import { useOutletContext } from "react-router-dom";
 
 const MainContainer = styled.div`
   display: flex;
@@ -20,9 +19,15 @@ const UserContainer = styled.div`
 `
 
 function Users() {
-  const users = useOutletContext().users
+  const [users, setUsers] = useState([])
   const [filterPlant, setFilterPlant] = useState('');
   const [sortBy, setSortBy] = useState("");
+
+  useEffect(() => {
+    fetch('/users')
+    .then(resp => resp.json())
+    .then(data => setUsers(data))
+  }, [])
 
   function handleSortSelection(sortSelection) {
     setSortBy(sortSelection);
@@ -30,6 +35,10 @@ function Users() {
 
   function handlePlantSelection(common_name) {
     setFilterPlant(common_name);
+  }
+
+  if(!users){
+    return <h1>Loading</h1>
   }
 
   const allPurchasedPlantsSet = new Set(users.reduce((result, user) => {
