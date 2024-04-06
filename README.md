@@ -7,6 +7,9 @@ Welcome to FloraFriends, your next social media destination! Create an account, 
 
 ![Home](/photo4read/Screenshot%202024-03-08%20at%2010.55.15 AM.png)
 
+## Demo
+[Visit Loom for a brief video demo](https://www.loom.com/share/26b6865b18d1469f863b2686266e60c9) 
+
 ## Getting Started
 
 Once you have the repo forked and cloned down to your local machine, open your terminal and confirm that you are in the parent directory of the repo, then.
